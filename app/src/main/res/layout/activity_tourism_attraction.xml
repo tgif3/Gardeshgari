@@ -5,18 +5,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-
-
-    <com.example.gardeshgari.HorizontalListView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:widget="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/HorizontalListView"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:divider="#fff"
-        widget:dividerWidth="0dp"
-        tools:ignore="MissingConstraints" />
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="200dp"
@@ -32,5 +20,15 @@
             android:layout_height="48dp"
             android:layout_alignParentBottom="true"/>
     </RelativeLayout>
+
+    <com.example.gardeshgari.HorizontalListView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:widget="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/HorizontalListView"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:divider="#fff"
+        widget:dividerWidth="0dp"
+        tools:ignore="MissingConstraints" />
 
 </LinearLayout>

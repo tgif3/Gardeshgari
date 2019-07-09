@@ -1,6 +1,5 @@
 package com.example.gardeshgari.adapter;
 
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,10 +10,9 @@ import android.widget.TextView;
 
 import com.example.gardeshgari.Model.AttractionModel;
 import com.example.gardeshgari.R;
-import com.example.gardeshgari.imageutils.ImageLoader;
+import com.example.gardeshgari.imageUtils.ImageLoader;
 
 import java.util.ArrayList;
-
 
 public class HorizontalAdapter extends BaseAdapter {
 
@@ -35,9 +33,9 @@ public class HorizontalAdapter extends BaseAdapter {
     public int getViewTypeCount() {
         return getCount();
     }
+
     @Override
     public int getItemViewType(int position) {
-
         return position;
     }
 
@@ -58,7 +56,6 @@ public class HorizontalAdapter extends BaseAdapter {
 
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = convertView;
-
         if(convertView == null)
             view = inflater.inflate(R.layout.attraction, null);
 

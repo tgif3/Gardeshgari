@@ -22,13 +22,9 @@ public class TourismAttractionActivity extends AppCompatActivity {
     private ArrayList<AttractionModel> attractionModelArrayList;
 
 
-
     private static ViewPager mPager;
     private static int currentPage = 0;
-    private static final Integer[] XMEN= {
-            R.drawable.img1,R.drawable.img2,R.drawable.img3,R.drawable.img4,};
-    private ArrayList<Integer> XMENArray = new ArrayList<Integer>();
-
+    private ArrayList<String> urls = new ArrayList<>();
 
 
     @Override
@@ -60,11 +56,12 @@ public class TourismAttractionActivity extends AppCompatActivity {
     }
 
     private void init() {
-        for(int i=0;i<XMEN.length;i++)
-            XMENArray.add(XMEN[i]);
+        for (int i = 0; i < 10; i++) {
+            urls.add("https://cdn.isna.ir/d/2016/10/20/3/57371326.jpg?ts=1498045331768");
+        }
 
-        mPager = (ViewPager) findViewById(R.id.pager);
-        mPager.setAdapter(new SliderAdapter(this, XMENArray));
+        mPager = findViewById(R.id.pager);
+        mPager.setAdapter(new SliderAdapter(this, urls));
         CircleIndicator indicator = (CircleIndicator) findViewById(R.id.indicator);
         indicator.setViewPager(mPager);
 
@@ -72,7 +69,7 @@ public class TourismAttractionActivity extends AppCompatActivity {
         final Handler handler = new Handler();
         final Runnable Update = new Runnable() {
             public void run() {
-                if (currentPage == XMEN.length) {
+                if (currentPage == urls.size()) {
                     currentPage = 0;
                 }
                 mPager.setCurrentItem(currentPage++, true);
@@ -84,6 +81,6 @@ public class TourismAttractionActivity extends AppCompatActivity {
             public void run() {
                 handler.post(Update);
             }
-        }, 2500, 2500);
+        }, 3000, 3000);
     }
 }
