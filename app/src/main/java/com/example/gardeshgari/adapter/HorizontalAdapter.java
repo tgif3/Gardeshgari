@@ -1,7 +1,6 @@
 package com.example.gardeshgari.adapter;
 
 
-import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,7 +22,7 @@ public class HorizontalAdapter extends BaseAdapter {
     private ArrayList<AttractionModel> attractionModels;
 
     private static LayoutInflater inflater=null;
-    public ImageLoader imageLoader;
+    private ImageLoader imageLoader;
 
     public HorizontalAdapter(Context context, ArrayList<AttractionModel> attractionModels) {
         this.context = context;
