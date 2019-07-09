@@ -60,7 +60,7 @@ public class HorizontalAdapter extends BaseAdapter {
         View view = convertView;
 
         if(convertView == null)
-            view = inflater.inflate(R.layout.row_listview_item, null);
+            view = inflater.inflate(R.layout.attraction, null);
 
         TextView text = view.findViewById(R.id.text);
         ImageView image = view.findViewById(R.id.image);

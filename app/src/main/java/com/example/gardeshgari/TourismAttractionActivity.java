@@ -35,8 +35,8 @@ public class TourismAttractionActivity extends AppCompatActivity {
     private void updateData() {
         attractionModelArrayList = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            attractionModelArrayList.add(new AttractionModel("Title " + (i + 1),
-                    "https://cdnw.elicdn.com/Blog/wp-content/uploads/2017/12/01iran.jpg"));
+            attractionModelArrayList.add(new AttractionModel("جنگل سی سنگان نوشهر",
+                    "https://www.zistonline.com/uploadFiles/editor/Alangdareh-park.jpg"));
         }
     }
 }
