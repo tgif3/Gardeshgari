@@ -65,6 +65,7 @@ public class TourismAttractionActivity extends AppCompatActivity {
 
         linearLayout = findViewById(R.id.mainListView);
         linearLayout.addView(attractionListView1);
+        horizontalListViews.add(horizontalListView);
     }
 
     @Override
