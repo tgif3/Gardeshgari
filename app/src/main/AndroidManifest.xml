@@ -15,7 +15,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".OstanAttractionsActivity"></activity>
+        <activity android:name=".AttractionActivity"></activity>
+        <activity android:name=".SouvenirActivity" />
+        <activity android:name=".OstanAttractionsActivity" />
         <activity android:name=".OstanActivity" />
         <activity android:name=".TourismAttractionActivity" />
         <activity android:name=".MainActivity">
