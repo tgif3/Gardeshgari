@@ -18,7 +18,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent intent = new Intent(this, OstanActivity.class);
+        Intent intent = new Intent(this, OstanAttractionsActivity.class);
         startActivity(intent);
 
     }

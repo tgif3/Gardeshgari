@@ -9,13 +9,14 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.gardeshgari.Model.AttractionModel;
 import com.example.gardeshgari.Model.OstanModel;
-import com.example.gardeshgari.adapter.HorizontalAdapter;
+import com.example.gardeshgari.adapter.AttractionOstanAdapter;
 import com.example.gardeshgari.adapter.OstanAdapter;
 
 import java.util.ArrayList;
 
-public class OstanActivity extends AppCompatActivity {
+public class OstanAttractionsActivity extends AppCompatActivity {
     private static LayoutInflater layoutInflater = null;
     private ListView listView;
 
@@ -27,12 +28,14 @@ public class OstanActivity extends AppCompatActivity {
         layoutInflater = (LayoutInflater)this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         listView = findViewById(R.id.listView);
-        ArrayList<OstanModel> ostanModels = new ArrayList<>();
+        ArrayList<AttractionModel> attractionModels = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            ostanModels.add(new OstanModel("تهران", "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Aerial_View_of_Tehran_26.11.2008_04-35-03.JPG/300px-Aerial_View_of_Tehran_26.11.2008_04-35-03.JPG"));
+            attractionModels.add(new AttractionModel("جنگل سی سنگان نوشهر",
+                    "https://www.zistonline.com/uploadFiles/editor/Alangdareh-park.jpg",
+                    "استان مازندران، 30 كيلومتری جاده نوشهر به نور، پارک جنگلی سی سنگان"));
         }
 
-        listView.setAdapter(new OstanAdapter(this, ostanModels));
+        listView.setAdapter(new AttractionOstanAdapter(this, attractionModels));
     }
 
     @Override
