@@ -54,7 +54,7 @@
                 android:textColor="#000"
                 android:textSize="14sp"
                 android:paddingRight="5dp"
-                android:paddingLeft="5dp"
+                android:paddingLeft="20dp"
                 />
 
             <ImageView

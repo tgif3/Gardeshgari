@@ -15,8 +15,9 @@ public class MainActivity extends Activity {
         dbHelper = new DBHelper(this, "database");
         dbHelper.readAttractions();
         dbHelper.readOstans();
+        dbHelper.readSouvenirs();
 
-        Intent intent = new Intent(this, OstanActivity.class);
+        Intent intent = new Intent(this, SouvenirActivity.class);
         startActivity(intent);
     }
 

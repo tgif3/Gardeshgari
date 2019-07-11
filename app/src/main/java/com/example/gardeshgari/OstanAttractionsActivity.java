@@ -28,14 +28,7 @@ public class OstanAttractionsActivity extends AppCompatActivity {
         layoutInflater = (LayoutInflater)this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         listView = findViewById(R.id.listView);
-        ArrayList<AttractionModel> attractionModels = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            attractionModels.add(new AttractionModel.Builder()
-                            .withTitle("جنگل سی سنگان نوشهر")
-                    .withImageUrl("https://www.zistonline.com/uploadFiles/editor/Alangdareh-park.jpg")
-                    .withAddress("استان مازندران، 30 كيلومتری جاده نوشهر به نور، پارک جنگلی سی سنگان")
-                    .build());
-        }
+        ArrayList<AttractionModel> attractionModels = MainActivity.getDbHelper().getAttractionsByOstan("تهران");
 
         listView.setAdapter(new AttractionOstanAdapter(this, attractionModels));
     }

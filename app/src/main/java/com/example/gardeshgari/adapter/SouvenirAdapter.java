@@ -65,7 +65,7 @@ public class SouvenirAdapter extends BaseAdapter {
 
         name.setText(souvenirModels.get(position).getName());
         description.setText(souvenirModels.get(position).getDescription());
-        imageLoader.DisplayImage(souvenirModels.get(position).getUrl(), image);
+        imageLoader.DisplayImage(souvenirModels.get(position).getImageUrl(), image);
 
         return view;
     }

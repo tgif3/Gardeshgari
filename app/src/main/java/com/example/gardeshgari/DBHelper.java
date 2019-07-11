@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.example.gardeshgari.Model.AttractionModel;
 import com.example.gardeshgari.Model.OstanModel;
+import com.example.gardeshgari.Model.SouvenirModel;
 
 import java.util.ArrayList;
 
@@ -16,7 +17,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private Context context;
 
     public DBHelper(Context context, String name) {
-        super(context, name , null, 1);
+        super(context, name, null, 1);
         this.context = context;
     }
 
@@ -26,27 +27,34 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS Ostans");
 
         db.execSQL("CREATE TABLE IF NOT EXISTS Attractions" +
-                        "(id INT NOT NULL PRIMARY KEY," +
-                        " title VARCHAR(63) NOT NULL," +
-                        " imageUrl TEXT NOT NULL," +
-                        " address VARCHAR(127) NOT NULL," +
-                        " type VARCHAR(127) NOT NULL," +
-                        " ostan VARCHAR(127) NOT NULL," +
-                        " description TEXT NOT NULL);");
+                "(id INT NOT NULL PRIMARY KEY," +
+                " title VARCHAR(63) NOT NULL," +
+                " imageUrl TEXT NOT NULL," +
+                " address VARCHAR(127) NOT NULL," +
+                " type VARCHAR(127) NOT NULL," +
+                " ostan VARCHAR(127) NOT NULL," +
+                " description TEXT NOT NULL);");
 
         db.execSQL("CREATE TABLE IF NOT EXISTS Ostans" +
-                        "(name VARCHAR(127) NOT NULL PRIMARY KEY," +
-                        " imageUrl TEXT NOT NULL)");
+                "(name VARCHAR(127) NOT NULL PRIMARY KEY," +
+                " imageUrl TEXT NOT NULL)");
+
+        db.execSQL("CREATE TABLE IF NOT EXISTS Souvenirs" +
+                "(name VARCHAR(127) NOT NULL PRIMARY KEY," +
+                " imageUrl TEXT NOT NULL," +
+                " ostan VARCHAR(127) NOT NULL," +
+                " description TEXT NOT NULL)");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS Attractions");
         db.execSQL("DROP TABLE IF EXISTS Ostans");
+        db.execSQL("DROP TABLE IF EXISTS Souvenirs");
         onCreate(db);
     }
 
-    public void insertAttraction (AttractionModel attractionModel) {
+    public void insertAttraction(AttractionModel attractionModel) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("id", attractionModel.getId());
@@ -59,7 +67,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.insert("Attractions", null, contentValues);
     }
 
-    public void insertOstan (OstanModel ostanModel) {
+    public void insertOstan(OstanModel ostanModel) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("name", ostanModel.getName());
@@ -67,14 +75,24 @@ public class DBHelper extends SQLiteOpenHelper {
         db.insert("Ostans", null, contentValues);
     }
 
+    public void insertSouvenir(SouvenirModel souvenirModel) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("name", souvenirModel.getName());
+        contentValues.put("imageUrl", souvenirModel.getImageUrl());
+        contentValues.put("ostan", souvenirModel.getOstan());
+        contentValues.put("description", souvenirModel.getDescription());
+        db.insert("Souvenirs", null, contentValues);
+    }
+
     public ArrayList<AttractionModel> getAllAttractions() {
         ArrayList<AttractionModel> arrayList = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        @SuppressLint("Recycle") Cursor res =  db.rawQuery( "select * from Attractions;", null);
+        @SuppressLint("Recycle") Cursor res = db.rawQuery("select * from Attractions;", null);
         res.moveToFirst();
 
-        while(!res.isAfterLast()) {
+        while (!res.isAfterLast()) {
             AttractionModel attractionModel = new AttractionModel.Builder()
                     .withId(res.getString(res.getColumnIndex("id")))
                     .withTitle(res.getString(res.getColumnIndex("title")))
@@ -91,14 +109,59 @@ public class DBHelper extends SQLiteOpenHelper {
         return arrayList;
     }
 
+    public ArrayList<AttractionModel> getAttractionsByOstan(String ostan) {
+        ArrayList<AttractionModel> arrayList = new ArrayList<>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        @SuppressLint("Recycle") Cursor res = db.rawQuery("select * from Attractions where ostan = \'" + ostan + "\';", null);
+        res.moveToFirst();
+
+        while (!res.isAfterLast()) {
+            AttractionModel attractionModel = new AttractionModel.Builder()
+                    .withId(res.getString(res.getColumnIndex("id")))
+                    .withTitle(res.getString(res.getColumnIndex("title")))
+                    .withImageUrl(res.getString(res.getColumnIndex("imageUrl")))
+                    .withAddress(res.getString(res.getColumnIndex("address")))
+                    .withOstan(res.getString(res.getColumnIndex("ostan")))
+                    .withType(res.getString(res.getColumnIndex("type")))
+                    .withDescription(res.getString(res.getColumnIndex("description")))
+                    .build();
+            arrayList.add(attractionModel);
+            res.moveToNext();
+        }
+
+        return arrayList;
+    }
+
+    public ArrayList<SouvenirModel> getSouvenirByOstan(String ostan) {
+        ArrayList<SouvenirModel> arrayList = new ArrayList<>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        @SuppressLint("Recycle") Cursor res = db.rawQuery("select * from Souvenirs where ostan = \'" + ostan + "\';", null);
+        res.moveToFirst();
+
+        while (!res.isAfterLast()) {
+            SouvenirModel souvenirModel = new SouvenirModel.Builder()
+                    .withName(res.getString(res.getColumnIndex("name")))
+                    .withImageUrl(res.getString(res.getColumnIndex("imageUrl")))
+                    .withOstan(res.getString(res.getColumnIndex("ostan")))
+                    .withDescription(res.getString(res.getColumnIndex("description")))
+                    .build();
+            arrayList.add(souvenirModel);
+            res.moveToNext();
+        }
+
+        return arrayList;
+    }
+
     public ArrayList<OstanModel> getAllOstans() {
         ArrayList<OstanModel> arrayList = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        @SuppressLint("Recycle") Cursor res =  db.rawQuery( "select * from Ostans;", null);
+        @SuppressLint("Recycle") Cursor res = db.rawQuery("select * from Ostans;", null);
         res.moveToFirst();
 
-        while(!res.isAfterLast()) {
+        while (!res.isAfterLast()) {
             OstanModel ostanModel = new OstanModel.Builder()
                     .withName(res.getString(res.getColumnIndex("name")))
                     .withImageUrl(res.getString(res.getColumnIndex("imageUrl")))
@@ -303,5 +366,15 @@ public class DBHelper extends SQLiteOpenHelper {
                 .withImageUrl("https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Amir_Chakmak_mosque.jpg/225px-Amir_Chakmak_mosque.jpg")
                 .build();
         insertOstan(ostanModel);
+    }
+
+    public void readSouvenirs() {
+        SouvenirModel souvenirModel = new SouvenirModel.Builder()
+                .withName("کیک یزدی")
+                .withImageUrl("https://setare.com/files/fa/news/1396/8/27/102566_537.jpg")
+                .withOstan("یزد")
+                .withDescription("کیک یزدی یکی از معروف\u200Cترین خوراکی\u200Cهای مختص استان است که البته امروزه در ویترین بیشتر شیرینی فروشی\u200Cهای کشور یافت می\u200Cشود، اما اگر می\u200Cخواهید نوع اصل آن را میل کنید حتماً باید به یزد سفر کنید. این کیک از ترکیب آرد، روغن مایع، شکر، گلاب ، پودر هل و تخم\u200Cمرغ تهیه می\u200Cشود.\n")
+                .build();
+        insertSouvenir(souvenirModel);
     }
 }
