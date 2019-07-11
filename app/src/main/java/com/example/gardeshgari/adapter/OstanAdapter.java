@@ -63,7 +63,7 @@ public class OstanAdapter extends BaseAdapter {
         ImageView image = view.findViewById(R.id.image);
 
         text.setText(ostanModels.get(position).getName());
-        imageLoader.DisplayImage(ostanModels.get(position).getUrl(), image);
+        imageLoader.DisplayImage(ostanModels.get(position).getImageUrl(), image);
 
         return view;
     }

@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.gardeshgari.Model.AttractionModel;
-import com.example.gardeshgari.Model.OstanModel;
 import com.example.gardeshgari.R;
 import com.example.gardeshgari.imageUtils.ImageLoader;
 
@@ -64,8 +63,8 @@ public class AttractionOstanAdapter extends BaseAdapter {
         TextView address = view.findViewById(R.id.address);
         ImageView image = view.findViewById(R.id.image);
 
-        address.setText(attractionModels.get(position).getLocation());
-        text.setText(attractionModels.get(position).getImageTitle());
+        address.setText(attractionModels.get(position).getAddress());
+        text.setText(attractionModels.get(position).getTitle());
         imageLoader.DisplayImage(attractionModels.get(position).getImageUrl(), image);
 
 

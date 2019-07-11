@@ -30,9 +30,11 @@ public class OstanAttractionsActivity extends AppCompatActivity {
         listView = findViewById(R.id.listView);
         ArrayList<AttractionModel> attractionModels = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            attractionModels.add(new AttractionModel("جنگل سی سنگان نوشهر",
-                    "https://www.zistonline.com/uploadFiles/editor/Alangdareh-park.jpg",
-                    "استان مازندران، 30 كيلومتری جاده نوشهر به نور، پارک جنگلی سی سنگان"));
+            attractionModels.add(new AttractionModel.Builder()
+                            .withTitle("جنگل سی سنگان نوشهر")
+                    .withImageUrl("https://www.zistonline.com/uploadFiles/editor/Alangdareh-park.jpg")
+                    .withAddress("استان مازندران، 30 كيلومتری جاده نوشهر به نور، پارک جنگلی سی سنگان")
+                    .build());
         }
 
         listView.setAdapter(new AttractionOstanAdapter(this, attractionModels));

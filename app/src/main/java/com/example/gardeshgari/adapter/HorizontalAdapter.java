@@ -62,7 +62,7 @@ public class HorizontalAdapter extends BaseAdapter {
         TextView text = view.findViewById(R.id.text);
         ImageView image = view.findViewById(R.id.image);
 
-        text.setText(attractionModels.get(position).getImageTitle());
+        text.setText(attractionModels.get(position).getTitle());
         imageLoader.DisplayImage(attractionModels.get(position).getImageUrl(), image);
 
         return view;

@@ -27,11 +27,7 @@ public class OstanActivity extends AppCompatActivity {
         layoutInflater = (LayoutInflater)this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         listView = findViewById(R.id.listView);
-        ArrayList<OstanModel> ostanModels = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            ostanModels.add(new OstanModel("تهران", "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Aerial_View_of_Tehran_26.11.2008_04-35-03.JPG/300px-Aerial_View_of_Tehran_26.11.2008_04-35-03.JPG"));
-        }
-
+        ArrayList<OstanModel> ostanModels = MainActivity.getDbHelper().getAllOstans();
         listView.setAdapter(new OstanAdapter(this, ostanModels));
     }
 

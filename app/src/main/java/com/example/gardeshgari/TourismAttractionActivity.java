@@ -39,15 +39,18 @@ public class TourismAttractionActivity extends AppCompatActivity {
 
         ArrayList<AttractionModel> attractionModelArrayList1 = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            attractionModelArrayList1.add(new AttractionModel("جنگل سی سنگان نوشهر",
-                    "https://www.zistonline.com/uploadFiles/editor/Alangdareh-park.jpg"));
+            attractionModelArrayList1.add(new AttractionModel.Builder()
+                    .withTitle("جنگل سی سنگان نوشهر")
+                    .withImageUrl("https://www.zistonline.com/uploadFiles/editor/Alangdareh-park.jpg")
+                    .build());
         }
         createListView(attractionModelArrayList1, "جنگل‌های سرسبز شمال کشور");
 
         ArrayList<AttractionModel> attractionModelArrayList2 = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            attractionModelArrayList2.add(new AttractionModel("جنگل حاشیه‌ی دریای خزر",
-                    "https://cdn.mehrbooking.net/general/Images/Blog/fa/2017/06/beautiful-forests-of-the-caspian-sea-banner.jpg"));
+            attractionModelArrayList2.add(new AttractionModel.Builder().withTitle("جنگل حاشیه‌ی دریای خزر")
+                    .withImageUrl("https://cdn.mehrbooking.net/general/Images/Blog/fa/2017/06/beautiful-forests-of-the-caspian-sea-banner.jpg")
+                    .build());
         }
         createListView(attractionModelArrayList2, "جنگل حاشیه‌ی دریای خزر");
 

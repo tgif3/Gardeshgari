@@ -1,104 +1,110 @@
-<ScrollView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="5dp">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/mainListView"
+    android:paddingTop="5dp"
+    android:paddingBottom="5dp"
+    android:paddingRight="5dp"
+    android:paddingLeft="5dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        tools:ignore="MissingConstraints">
+        <android.support.v4.view.ViewPager
+            android:id="@+id/pager"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_alignParentTop="true" />
+        <me.relex.circleindicator.CircleIndicator
+            android:id="@+id/indicator"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_alignParentBottom="true"/>
+    </RelativeLayout>
+
+    <TableRow
+        android:id="@+id/hr"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#000"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"/>
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:textColor="#000"
+        android:textSize="28sp"
+        android:padding="5dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:id="@+id/mainListView"
-        >
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            tools:ignore="MissingConstraints">
-            <android.support.v4.view.ViewPager
-                android:id="@+id/pager"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_alignParentTop="true" />
-            <me.relex.circleindicator.CircleIndicator
-                android:id="@+id/indicator"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_alignParentBottom="true"/>
-        </RelativeLayout>
-
-        <TableRow
-            android:id="@+id/hr"
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="#000"/>
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="right"
+        tools:ignore="RtlHardcoded"
+        android:padding="5dp">
 
         <TextView
-            android:id="@+id/name"
-            android:layout_width="match_parent"
+            android:id="@+id/address"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:textColor="#000"
-            android:textSize="24sp"
-            android:padding="10dp"/>
+            android:textSize="20sp"
+            android:paddingLeft="20dp"
+            android:paddingRight="10dp"
+            />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="right"
-            tools:ignore="RtlHardcoded"
-            android:padding="20dp">
-
-            <TextView
-                android:id="@+id/address"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:textColor="#000"
-                android:textSize="18sp"
-                android:paddingRight="5dp"
-                android:paddingLeft="20dp"
-                />
-
-            <ImageView
-                android:id="@+id/locationIcon"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@drawable/location"
-                tools:ignore="ContentDescription" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="right"
-            tools:ignore="RtlHardcoded"
-            android:padding="10dp">
-
-            <TextView
-                android:id="@+id/description"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:textColor="#000"
-                android:textSize="14sp"
-                android:paddingRight="5dp"
-                android:paddingLeft="25dp"
-                />
-
-            <ImageView
-                android:id="@+id/descriptionIcon"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@drawable/description"
-                tools:ignore="ContentDescription" />
-
-        </LinearLayout>
-
+        <ImageView
+            android:id="@+id/locationIcon"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/address"
+            tools:ignore="ContentDescription" />
 
     </LinearLayout>
-</ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="right"
+        tools:ignore="RtlHardcoded"
+        android:padding="5dp">
+
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none" >
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:textColor="#000"
+            android:textSize="16sp"
+            android:paddingLeft="20dp"
+            android:paddingRight="10dp"
+            />
+        </ScrollView>
+
+        <ImageView
+            android:id="@+id/descriptionIcon"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/description"
+            tools:ignore="ContentDescription" />
+
+    </LinearLayout>
+
+
+</LinearLayout>
