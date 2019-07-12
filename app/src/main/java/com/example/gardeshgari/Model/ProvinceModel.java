@@ -1,6 +1,6 @@
 package com.example.gardeshgari.Model;
 
-public class OstanModel {
+public class ProvinceModel {
     private String name;
     private String imageUrl;
 
@@ -18,12 +18,12 @@ public class OstanModel {
             return this;
         }
 
-        public OstanModel build() {
-            return new OstanModel(name, imageUrl);
+        public ProvinceModel build() {
+            return new ProvinceModel(name, imageUrl);
         }
     }
 
-    private OstanModel(String name, String imageUrl) {
+    private ProvinceModel(String name, String imageUrl) {
         this.name = name;
         this.imageUrl = imageUrl;
     }

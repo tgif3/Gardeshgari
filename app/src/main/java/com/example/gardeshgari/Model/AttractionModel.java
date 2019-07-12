@@ -5,7 +5,7 @@ public class AttractionModel {
     private String title;
     private String imageUrl;
     private String address;
-    private String ostan;
+    private String province;
     private String type;
     private String description;
 
@@ -14,7 +14,7 @@ public class AttractionModel {
         private String title;
         private String imageUrl;
         private String address;
-        private String ostan;
+        private String province;
         private String type;
         private String description;
 
@@ -43,8 +43,8 @@ public class AttractionModel {
             return this;
         }
 
-        public Builder withOstan(String ostan) {
-            this.ostan = ostan;
+        public Builder withProvince(String province) {
+            this.province = province;
             return this;
         }
 
@@ -54,17 +54,17 @@ public class AttractionModel {
         }
 
         public AttractionModel build() {
-            return new AttractionModel(id, title, imageUrl, address, type, ostan, description);
+            return new AttractionModel(id, title, imageUrl, address, type, province, description);
         }
     }
 
-    private AttractionModel(String id, String title, String imageUrl, String address, String type, String ostan, String description) {
+    private AttractionModel(String id, String title, String imageUrl, String address, String type, String province, String description) {
         this.id = id;
         this.title = title;
         this.imageUrl = imageUrl;
         this.address = address;
         this.type = type;
-        this.ostan = ostan;
+        this.province = province;
         this.description = description;
     }
 
@@ -86,8 +86,8 @@ public class AttractionModel {
 
     public String getType() { return type; }
 
-    public String getOstan() {
-        return ostan;
+    public String getProvince() {
+        return province;
     }
 
     public String getDescription() {

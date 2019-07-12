@@ -1,37 +1,32 @@
-package com.example.gardeshgari;
+package com.example.gardeshgari.activities;
 
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.example.gardeshgari.Model.AttractionModel;
-import com.example.gardeshgari.Model.OstanModel;
-import com.example.gardeshgari.Model.SouvenirModel;
-import com.example.gardeshgari.adapter.AttractionOstanAdapter;
-import com.example.gardeshgari.adapter.OstanAdapter;
-import com.example.gardeshgari.adapter.SouvenirAdapter;
+import com.example.gardeshgari.R;
+import com.example.gardeshgari.adapter.AttractionProvinceAdapter;
 
 import java.util.ArrayList;
 
-public class SouvenirActivity extends AppCompatActivity {
+public class ProvinceAttractionsActivity extends AppCompatActivity {
     private static LayoutInflater layoutInflater = null;
     private ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_souvenir);
+        setContentView(R.layout.activity_province_attractions);
 
         layoutInflater = (LayoutInflater)this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         listView = findViewById(R.id.listView);
-        ArrayList<SouvenirModel> souvenirModelArrayList = MainActivity.getDbHelper().getSouvenirByOstan("یزد");
-        listView.setAdapter(new SouvenirAdapter(this, souvenirModelArrayList));
+        ArrayList<AttractionModel> attractionModels = MainActivity.getDbHelper().getAttractionsByProvince("تهران");
+
+        listView.setAdapter(new AttractionProvinceAdapter(this, attractionModels));
     }
 
     @Override

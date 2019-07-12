@@ -1,4 +1,4 @@
-package com.example.gardeshgari;
+package com.example.gardeshgari.activities;
 
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.example.gardeshgari.Model.AttractionModel;
 import com.example.gardeshgari.Model.PictureModel;
+import com.example.gardeshgari.R;
 import com.example.gardeshgari.adapter.SliderAdapter;
 
 import java.util.ArrayList;

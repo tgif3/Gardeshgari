@@ -15,12 +15,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AttractionActivity"></activity>
-        <activity android:name=".SouvenirActivity" />
+        <activity android:name=".activities.AttractionActivity"></activity>
+        <activity android:name=".activities.SouvenirActivity" />
         <activity android:name=".OstanAttractionsActivity" />
         <activity android:name=".OstanActivity" />
-        <activity android:name=".TourismAttractionActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".activities.TourismAttractionActivity" />
+        <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

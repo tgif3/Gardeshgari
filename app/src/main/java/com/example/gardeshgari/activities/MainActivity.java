@@ -1,8 +1,11 @@
-package com.example.gardeshgari;
+package com.example.gardeshgari.activities;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+
+import com.example.gardeshgari.DBHelper;
+import com.example.gardeshgari.R;
 
 public class MainActivity extends Activity {
     private static DBHelper dbHelper;
@@ -14,7 +17,7 @@ public class MainActivity extends Activity {
 
         dbHelper = new DBHelper(this, "database");
         dbHelper.readAttractions();
-        dbHelper.readOstans();
+        dbHelper.readProvinces();
         dbHelper.readSouvenirs();
         dbHelper.readPictures();
 

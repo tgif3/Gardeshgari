@@ -1,4 +1,4 @@
-package com.example.gardeshgari;
+package com.example.gardeshgari.activities;
 
 import android.content.Context;
 import android.os.Handler;
@@ -10,7 +10,9 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.gardeshgari.HorizontalListView;
 import com.example.gardeshgari.Model.AttractionModel;
+import com.example.gardeshgari.R;
 import com.example.gardeshgari.adapter.HorizontalAdapter;
 import com.example.gardeshgari.adapter.SliderAdapter;
 

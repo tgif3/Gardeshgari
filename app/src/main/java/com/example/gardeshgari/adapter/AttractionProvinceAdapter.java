@@ -8,23 +8,23 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.gardeshgari.Model.OstanModel;
+import com.example.gardeshgari.Model.AttractionModel;
 import com.example.gardeshgari.R;
 import com.example.gardeshgari.imageUtils.ImageLoader;
 
 import java.util.ArrayList;
 
-public class OstanAdapter extends BaseAdapter {
+public class AttractionProvinceAdapter extends BaseAdapter {
 
     private Context context;
-    private ArrayList<OstanModel> ostanModels;
+    private ArrayList<AttractionModel> attractionModels;
 
     private static LayoutInflater inflater=null;
     private ImageLoader imageLoader;
 
-    public OstanAdapter(Context context, ArrayList<OstanModel> ostanModels) {
+    public AttractionProvinceAdapter(Context context, ArrayList<AttractionModel> attractionModels) {
         this.context = context;
-        this.ostanModels = ostanModels;
+        this.attractionModels = attractionModels;
         inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         imageLoader = new ImageLoader(context.getApplicationContext());
     }
@@ -41,12 +41,12 @@ public class OstanAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return ostanModels.size();
+        return attractionModels.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return ostanModels.get(position);
+        return attractionModels.get(position);
     }
 
     @Override
@@ -57,13 +57,16 @@ public class OstanAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = convertView;
         if(convertView == null)
-            view = inflater.inflate(R.layout.ostan_item, null);
+            view = inflater.inflate(R.layout.province_attraction, null);
 
         TextView text = view.findViewById(R.id.name);
+        TextView address = view.findViewById(R.id.address);
         ImageView image = view.findViewById(R.id.image);
 
-        text.setText(ostanModels.get(position).getName());
-        imageLoader.DisplayImage(ostanModels.get(position).getImageUrl(), image);
+        address.setText(attractionModels.get(position).getAddress());
+        text.setText(attractionModels.get(position).getTitle());
+        imageLoader.DisplayImage(attractionModels.get(position).getImageUrl(), image);
+
 
         return view;
     }
