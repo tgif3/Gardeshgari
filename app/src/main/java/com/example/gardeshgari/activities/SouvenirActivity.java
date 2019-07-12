@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.widget.ListView;
 
+import com.example.gardeshgari.Model.ProvinceModel;
 import com.example.gardeshgari.Model.SouvenirModel;
 import com.example.gardeshgari.R;
 import com.example.gardeshgari.adapter.SouvenirAdapter;
@@ -15,6 +16,16 @@ import java.util.ArrayList;
 public class SouvenirActivity extends AppCompatActivity {
     private static LayoutInflater layoutInflater = null;
     private ListView listView;
+    private static ProvinceModel provinceModel;
+
+    public static ProvinceModel getProvinceModel() {
+        return provinceModel;
+    }
+
+    public static void setProvinceModel(ProvinceModel provinceModel) {
+        SouvenirActivity.provinceModel = provinceModel;
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +35,7 @@ public class SouvenirActivity extends AppCompatActivity {
         layoutInflater = (LayoutInflater)this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         listView = findViewById(R.id.listView);
-        ArrayList<SouvenirModel> souvenirModelArrayList = MainActivity.getDbHelper().getSouvenirByProvince("یزد");
+        ArrayList<SouvenirModel> souvenirModelArrayList = MainActivity.getDbHelper().getSouvenirByProvince(provinceModel.getName());
         listView.setAdapter(new SouvenirAdapter(this, souvenirModelArrayList));
     }
 

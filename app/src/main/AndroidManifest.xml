@@ -17,8 +17,8 @@
         android:theme="@style/AppTheme">
         <activity android:name=".activities.AttractionActivity"></activity>
         <activity android:name=".activities.SouvenirActivity" />
-        <activity android:name=".OstanAttractionsActivity" />
-        <activity android:name=".OstanActivity" />
+        <activity android:name=".activities.ProvinceAttractionsActivity" />
+        <activity android:name=".activities.ProvinceActivity" />
         <activity android:name=".activities.TourismAttractionActivity" />
         <activity android:name=".activities.MainActivity">
             <intent-filter>

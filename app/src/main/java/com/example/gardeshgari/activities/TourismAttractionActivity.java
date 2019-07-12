@@ -46,6 +46,7 @@ public class TourismAttractionActivity extends AppCompatActivity {
         createListView(MainActivity.getDbHelper().getAttractionsByType(AttractionType.historical.toString()), "تاریخی و فرهنگی");
         createListView(MainActivity.getDbHelper().getAttractionsByType(AttractionType.museum.toString()), "موزه‌ها");
         createListView(MainActivity.getDbHelper().getAttractionsByType(AttractionType.shopping.toString()), "مراکز خرید");
+        createListView(MainActivity.getDbHelper().getAttractionsByType(AttractionType.amusementPark.toString()), "شهربازی‌ها");
         init();
     }
 
