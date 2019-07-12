@@ -38,7 +38,8 @@ public class ProvinceActivity extends AppCompatActivity {
             public void onItemClick(AdapterView parent, View view, int position, long id) {
                 ProvinceModel provinceModel = provinceModels.get(position);
                 SouvenirActivity.setProvinceModel(provinceModel);
-                Intent intent = new Intent(context, SouvenirActivity.class);
+                ProvinceAttractionsActivity.setProvinceModel(provinceModel);
+                Intent intent = new Intent(context, ProvinceAttractionsActivity.class);
                 startActivity(intent);
             }
         });

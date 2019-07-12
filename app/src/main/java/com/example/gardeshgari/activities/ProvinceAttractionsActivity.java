@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.widget.ListView;
 
 import com.example.gardeshgari.Model.AttractionModel;
+import com.example.gardeshgari.Model.ProvinceModel;
 import com.example.gardeshgari.R;
 import com.example.gardeshgari.adapter.AttractionProvinceAdapter;
 
@@ -15,6 +16,15 @@ import java.util.ArrayList;
 public class ProvinceAttractionsActivity extends AppCompatActivity {
     private static LayoutInflater layoutInflater = null;
     private ListView listView;
+    private static ProvinceModel provinceModel;
+
+    public static ProvinceModel getProvinceModel() {
+        return provinceModel;
+    }
+
+    public static void setProvinceModel(ProvinceModel provinceModel) {
+        ProvinceAttractionsActivity.provinceModel = provinceModel;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +34,7 @@ public class ProvinceAttractionsActivity extends AppCompatActivity {
         layoutInflater = (LayoutInflater)this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         listView = findViewById(R.id.listView);
-        ArrayList<AttractionModel> attractionModels = MainActivity.getDbHelper().getAttractionsByProvince("تهران");
+        ArrayList<AttractionModel> attractionModels = MainActivity.getDbHelper().getAttractionsByProvince(provinceModel.getName());
 
         listView.setAdapter(new AttractionProvinceAdapter(this, attractionModels));
     }
