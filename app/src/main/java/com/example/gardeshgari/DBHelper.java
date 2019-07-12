@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.example.gardeshgari.Model.AttractionModel;
 import com.example.gardeshgari.Model.OstanModel;
+import com.example.gardeshgari.Model.PictureModel;
 import com.example.gardeshgari.Model.SouvenirModel;
 
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("DROP TABLE IF EXISTS Attractions");
         db.execSQL("DROP TABLE IF EXISTS Ostans");
+        db.execSQL("DROP TABLE IF EXISTS Souvenirs");
 
         db.execSQL("CREATE TABLE IF NOT EXISTS Attractions" +
                 "(id INT NOT NULL PRIMARY KEY," +
@@ -44,6 +46,11 @@ public class DBHelper extends SQLiteOpenHelper {
                 " imageUrl TEXT NOT NULL," +
                 " ostan VARCHAR(127) NOT NULL," +
                 " description TEXT NOT NULL)");
+
+        db.execSQL("CREATE TABLE IF NOT EXISTS Pictures" +
+                "(id INT NOT NULL PRIMARY KEY," +
+                " imageUrl TEXT NOT NULL," +
+                " attractionId INT NOT NULL)");
     }
 
     @Override
@@ -51,6 +58,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS Attractions");
         db.execSQL("DROP TABLE IF EXISTS Ostans");
         db.execSQL("DROP TABLE IF EXISTS Souvenirs");
+        db.execSQL("DROP TABLE IF EXISTS Pictures");
         onCreate(db);
     }
 
@@ -83,6 +91,15 @@ public class DBHelper extends SQLiteOpenHelper {
         contentValues.put("ostan", souvenirModel.getOstan());
         contentValues.put("description", souvenirModel.getDescription());
         db.insert("Souvenirs", null, contentValues);
+    }
+
+    public void insertPicture(PictureModel pictureModel) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("id", pictureModel.getId());
+        contentValues.put("imageUrl", pictureModel.getImageUrl());
+        contentValues.put("attractionId", pictureModel.getAttractionId());
+        db.insert("Pictures", null, contentValues);
     }
 
     public ArrayList<AttractionModel> getAllAttractions() {
@@ -167,6 +184,26 @@ public class DBHelper extends SQLiteOpenHelper {
                     .withImageUrl(res.getString(res.getColumnIndex("imageUrl")))
                     .build();
             arrayList.add(ostanModel);
+            res.moveToNext();
+        }
+
+        return arrayList;
+    }
+
+    public ArrayList<PictureModel> getAllPicturesByAttractionId(String attractionId) {
+        ArrayList<PictureModel> arrayList = new ArrayList<>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        @SuppressLint("Recycle") Cursor res = db.rawQuery("select * from Pictures where attractionId = \'" + attractionId + "\';", null);
+        res.moveToFirst();
+
+        while (!res.isAfterLast()) {
+            PictureModel pictureModel = new PictureModel.Builder()
+                    .withId(res.getString(res.getColumnIndex("id")))
+                    .withImageUrl(res.getString(res.getColumnIndex("imageUrl")))
+                    .withAttractionId(res.getString(res.getColumnIndex("attractionId")))
+                    .build();
+            arrayList.add(pictureModel);
             res.moveToNext();
         }
 
@@ -376,5 +413,36 @@ public class DBHelper extends SQLiteOpenHelper {
                 .withDescription("کیک یزدی یکی از معروف\u200Cترین خوراکی\u200Cهای مختص استان است که البته امروزه در ویترین بیشتر شیرینی فروشی\u200Cهای کشور یافت می\u200Cشود، اما اگر می\u200Cخواهید نوع اصل آن را میل کنید حتماً باید به یزد سفر کنید. این کیک از ترکیب آرد، روغن مایع، شکر، گلاب ، پودر هل و تخم\u200Cمرغ تهیه می\u200Cشود.\n")
                 .build();
         insertSouvenir(souvenirModel);
+    }
+
+
+    public void readPictures() {
+        PictureModel pictureModel = new PictureModel.Builder()
+                .withId("1")
+                .withImageUrl("https://cdnw.elicdn.com/Blog/wp-content/uploads/2019/02/%D8%B1%D9%88%D8%B3%D8%AA%D8%A7%DB%8C-%D8%B2%D8%B1%DB%8C%D9%86-%D8%AF%D8%B4%D8%AA.jpg")
+                .withAttractionId("1")
+                .build();
+        insertPicture(pictureModel);
+
+        pictureModel = new PictureModel.Builder()
+                .withId("2")
+                .withImageUrl("https://cdn.yjc.ir/files/fa/news/1397/4/20/8302643_391.jpg")
+                .withAttractionId("1")
+                .build();
+        insertPicture(pictureModel);
+
+        pictureModel = new PictureModel.Builder()
+                .withId("3")
+                .withImageUrl("https://cdn.yjc.ir/files/fa/news/1397/4/20/8302642_742.jpg")
+                .withAttractionId("1")
+                .build();
+        insertPicture(pictureModel);
+
+        pictureModel = new PictureModel.Builder()
+                .withId("4")
+                .withImageUrl("https://cdn.yjc.ir/files/fa/news/1397/4/20/8302641_797.jpg")
+                .withAttractionId("1")
+                .build();
+        insertPicture(pictureModel);
     }
 }
