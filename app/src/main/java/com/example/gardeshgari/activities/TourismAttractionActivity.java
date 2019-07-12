@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.gardeshgari.HorizontalListView;
 import com.example.gardeshgari.Model.AttractionModel;
+import com.example.gardeshgari.Model.AttractionType;
 import com.example.gardeshgari.R;
 import com.example.gardeshgari.adapter.HorizontalAdapter;
 import com.example.gardeshgari.adapter.SliderAdapter;
@@ -39,24 +40,12 @@ public class TourismAttractionActivity extends AppCompatActivity {
         horizontalListViews = new ArrayList<>();
         layoutInflater = (LayoutInflater)this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        ArrayList<AttractionModel> attractionModelArrayList1 = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            attractionModelArrayList1.add(new AttractionModel.Builder()
-                    .withTitle("جنگل سی سنگان نوشهر")
-                    .withImageUrl("https://www.zistonline.com/uploadFiles/editor/Alangdareh-park.jpg")
-                    .build());
-        }
-        createListView(attractionModelArrayList1, "جنگل‌های سرسبز شمال کشور");
-
-        ArrayList<AttractionModel> attractionModelArrayList2 = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            attractionModelArrayList2.add(new AttractionModel.Builder().withTitle("جنگل حاشیه‌ی دریای خزر")
-                    .withImageUrl("https://cdn.mehrbooking.net/general/Images/Blog/fa/2017/06/beautiful-forests-of-the-caspian-sea-banner.jpg")
-                    .build());
-        }
-        createListView(attractionModelArrayList2, "جنگل حاشیه‌ی دریای خزر");
-
-
+        createListView(MainActivity.getDbHelper().getAttractionsByType(AttractionType.natural.toString()), "جاذبه‌های طبیعی");
+        createListView(MainActivity.getDbHelper().getAttractionsByType(AttractionType.coast.toString()), "سواحل شمال و جنوب");
+        createListView(MainActivity.getDbHelper().getAttractionsByType(AttractionType.health.toString()), "گردشگری و سلامت");
+        createListView(MainActivity.getDbHelper().getAttractionsByType(AttractionType.historical.toString()), "تاریخی و فرهنگی");
+        createListView(MainActivity.getDbHelper().getAttractionsByType(AttractionType.museum.toString()), "موزه‌ها");
+        createListView(MainActivity.getDbHelper().getAttractionsByType(AttractionType.shopping.toString()), "مراکز خرید");
         init();
     }
 
