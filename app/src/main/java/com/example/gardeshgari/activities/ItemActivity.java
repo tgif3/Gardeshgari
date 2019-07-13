@@ -10,20 +10,33 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
+import android.widget.ListView;
 
 import com.example.gardeshgari.Model.ProvinceModel;
+import com.example.gardeshgari.Model.SouvenirModel;
 import com.example.gardeshgari.R;
+import com.example.gardeshgari.adapter.SouvenirAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ItemActivity extends AppCompatActivity {
-
+    private static LayoutInflater layoutInflater = null;
+    private static SouvenirAdapter souvenirAdapter;
     private TabLayout tabLayout;
     public ViewPager viewPager;
     private Toolbar toolbar;
     private static Context context;
     private static ProvinceModel provinceModel;
+
+    public static SouvenirAdapter getSouvenirAdapter() {
+        return souvenirAdapter;
+    }
+
+    public static void setSouvenirAdapter(SouvenirAdapter souvenirAdapter) {
+        ItemActivity.souvenirAdapter = souvenirAdapter;
+    }
 
     @SuppressLint("CutPasteId")
     @Override
@@ -41,6 +54,9 @@ public class ItemActivity extends AppCompatActivity {
         tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
 
+        layoutInflater = (LayoutInflater)this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        ArrayList<SouvenirModel> souvenirModelArrayList = MainActivity.getDbHelper().getSouvenirByProvince(provinceModel.getName());
+        souvenirAdapter = new SouvenirAdapter(this, souvenirModelArrayList);
     }
 
     private void setupViewPager(ViewPager viewPager) {
