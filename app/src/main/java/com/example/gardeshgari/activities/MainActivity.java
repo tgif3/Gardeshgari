@@ -20,7 +20,7 @@ public class MainActivity extends Activity {
 
         InitialClass initialClass = new InitialClass(dbHelper);
 
-        Intent intent = new Intent(this, ProvinceActivity.class);
+        Intent intent = new Intent(this, ItemActivity.class);
         startActivity(intent);
     }
 

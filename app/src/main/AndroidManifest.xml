@@ -20,6 +20,7 @@
         <activity android:name=".activities.ProvinceAttractionsActivity" />
         <activity android:name=".activities.ProvinceActivity" />
         <activity android:name=".activities.TourismAttractionActivity" />
+        <activity android:name=".activities.ItemActivity" />
         <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
