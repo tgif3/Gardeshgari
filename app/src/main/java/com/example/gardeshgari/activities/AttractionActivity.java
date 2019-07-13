@@ -22,18 +22,20 @@ public class AttractionActivity extends AppCompatActivity {
     private ArrayList<String> urls;
     private static ViewPager mPager;
     private static int currentPage = 0;
+    private static AttractionModel attractionModel;
+
+    public static void setAttractionModel(AttractionModel attractionModel) {
+        AttractionActivity.attractionModel = attractionModel;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_attraction);
 
-
         TextView name = findViewById(R.id.name);
         TextView address = findViewById(R.id.address);
         TextView description = findViewById(R.id.description);
-
-        AttractionModel attractionModel = MainActivity.getDbHelper().getAllAttractions().get(0);
 
         name.setText(attractionModel.getTitle());
         address.setText(attractionModel.getAddress());
@@ -47,6 +49,7 @@ public class AttractionActivity extends AppCompatActivity {
         for (PictureModel pictureModel : pictureModels) {
             urls.add(pictureModel.getImageUrl());
         }
+        urls.add(attractionModel.getImageUrl());
 
         mPager = findViewById(R.id.pager);
         mPager.setAdapter(new SliderAdapter(this, urls));

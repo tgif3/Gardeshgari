@@ -1,14 +1,20 @@
 package com.example.gardeshgari.activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.gardeshgari.HorizontalListView;
 import com.example.gardeshgari.Model.AttractionModel;
@@ -97,5 +103,20 @@ public class TourismAttractionActivity extends AppCompatActivity {
                 handler.post(Update);
             }
         }, 0, 3000);
+    }
+
+    public void onCreateOptionsMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.province_menu, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.province) {
+            Intent intent = new Intent(this, ProvinceActivity.class);
+            startActivity(intent);
+        }
+        return super.onContextItemSelected(item);
     }
 }

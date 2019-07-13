@@ -57,7 +57,7 @@ public class SouvenirAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = convertView;
         if(convertView == null)
-            view = inflater.inflate(R.layout.souvenir_item, null);
+            view = inflater.inflate(R.layout.province_souvenir, null);
 
         TextView name = view.findViewById(R.id.name);
         TextView description = view.findViewById(R.id.description);
