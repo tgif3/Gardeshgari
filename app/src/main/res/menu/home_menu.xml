@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/home"
+        android:id="@+id/province"
         android:orderInCategory="100"
-        android:title="خانه"
-        android:icon="@drawable/home"
+        android:title="استان"
+        android:icon="@drawable/province"
         app:showAsAction="always" />
 
 </menu>

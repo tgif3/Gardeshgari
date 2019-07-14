@@ -43,6 +43,7 @@ public class AttractionFragment extends Fragment {
                 AttractionModel attractionModel = (AttractionModel)
                         ItemActivity.getAttractionProvinceAdapter().getItem(position);
                 AttractionActivity.setAttractionModel(attractionModel);
+                AttractionActivity.setCallByHome(false);
                 Intent intent = new Intent(getActivity(), AttractionActivity.class);
                 startActivity(intent);
             }

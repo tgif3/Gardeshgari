@@ -1,10 +1,15 @@
 package com.example.gardeshgari.activities;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 import com.example.gardeshgari.Model.AttractionModel;
 import com.example.gardeshgari.Model.PictureModel;
@@ -23,15 +28,25 @@ public class AttractionActivity extends AppCompatActivity {
     private static ViewPager mPager;
     private static int currentPage = 0;
     private static AttractionModel attractionModel;
+    private static boolean callByHome;
+    private android.support.v7.widget.Toolbar toolbar;
 
     public static void setAttractionModel(AttractionModel attractionModel) {
         AttractionActivity.attractionModel = attractionModel;
     }
 
+    public static void setCallByHome(boolean callByHome) {
+        AttractionActivity.callByHome = callByHome;
+    }
+
+    @SuppressLint("CutPasteId")
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_attraction);
+
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         TextView name = findViewById(R.id.name);
         TextView address = findViewById(R.id.address);
@@ -72,5 +87,29 @@ public class AttractionActivity extends AppCompatActivity {
                 handler.post(Update);
             }
         }, 0, 3000);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        if (callByHome) {
+            getMenuInflater().inflate(R.menu.home_menu, menu);
+        } else {
+            getMenuInflater().inflate(R.menu.province_menu, menu);
+        }
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.province) {
+            Intent intent = new Intent(this, ProvinceActivity.class);
+            startActivity(intent);
+            return true;
+        } else if (id == R.id.home) {
+            Intent intent = new Intent(this, TourismAttractionActivity.class);
+            startActivity(intent);
+        }
+        return false;
     }
 }

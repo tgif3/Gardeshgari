@@ -3,6 +3,7 @@ package com.example.gardeshgari.activities;
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -10,6 +11,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.gardeshgari.Model.AttractionModel;
 import com.example.gardeshgari.Model.ProvinceModel;
@@ -47,7 +51,6 @@ public class ItemActivity extends AppCompatActivity {
         setContentView(R.layout.activity_item);
 
         toolbar = findViewById(R.id.toolbar);
-
         setSupportActionBar(toolbar);
 
         viewPager = findViewById(R.id.viewpager);
@@ -74,5 +77,22 @@ public class ItemActivity extends AppCompatActivity {
 
     public static void setProvinceModel(ProvinceModel provinceModel) {
         ItemActivity.provinceModel = provinceModel;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.province_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.home) {
+            Intent intent = new Intent(this, TourismAttractionActivity.class);
+            startActivity(intent);
+            return true;
+        }
+        return false;
     }
 }

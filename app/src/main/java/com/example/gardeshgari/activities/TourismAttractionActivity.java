@@ -6,12 +6,14 @@ import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,12 +38,18 @@ public class TourismAttractionActivity extends AppCompatActivity {
     private ArrayList<String> urls = new ArrayList<>();
     private static LayoutInflater layoutInflater = null;
     private ArrayList<HorizontalListView> horizontalListViews;
-
+    private Toolbar toolbar;
+    private Context context;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tourism_attraction);
+
+        context = this;
+
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         horizontalListViews = new ArrayList<>();
         layoutInflater = (LayoutInflater)this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -59,10 +67,23 @@ public class TourismAttractionActivity extends AppCompatActivity {
     private void createListView(ArrayList<AttractionModel> attractionModels, String title) {
         View attractionListView1 = layoutInflater.inflate(R.layout.attraction_list_view, null);
         HorizontalListView horizontalListView = attractionListView1.findViewById(R.id.HorizontalListView);
-        horizontalListView.setAdapter(new HorizontalAdapter(this, attractionModels));
+        HorizontalAdapter horizontalAdapter = new HorizontalAdapter(this, attractionModels);
+        horizontalListView.setAdapter(horizontalAdapter);
         LinearLayout linearLayout = attractionListView1.findViewById(R.id.linearLayout);
         TextView titleTextView = linearLayout.findViewById(R.id.title);
         titleTextView.setText(title);
+
+        horizontalListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView parent, View view, int position, long id) {
+                AttractionModel attractionModel = (AttractionModel)
+                        parent.getAdapter().getItem(position);
+                AttractionActivity.setAttractionModel(attractionModel);
+                AttractionActivity.setCallByHome(true);
+                Intent intent = new Intent(context, AttractionActivity.class);
+                startActivity(intent);
+            }
+        });
 
         linearLayout = findViewById(R.id.mainListView);
         linearLayout.addView(attractionListView1);
@@ -105,10 +126,10 @@ public class TourismAttractionActivity extends AppCompatActivity {
         }, 0, 3000);
     }
 
-    public void onCreateOptionsMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-        super.onCreateContextMenu(menu, v, menuInfo);
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.province_menu, menu);
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.home_menu, menu);
+        return true;
     }
 
     @Override
