@@ -12,7 +12,7 @@
         android:id="@+id/save"
         android:orderInCategory="100"
         android:title="ذخیره"
-        android:icon="@drawable/saved"
+        android:icon="@drawable/unsaved"
         app:showAsAction="always" />
 
 </menu>

@@ -15,6 +15,7 @@ import com.example.gardeshgari.Model.PictureModel;
 import com.example.gardeshgari.Model.SouvenirModel;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class DBHelper extends SQLiteOpenHelper {
     private Context context;
@@ -61,7 +62,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 "(id INT NOT NULL PRIMARY KEY)");
 
         db.execSQL("CREATE TABLE IF NOT EXISTS SavedSouvenirs" +
-                "(id INT NOT NULL PRIMARY KEY)");
+                "(name VARCHAR(127) NOT NULL PRIMARY KEY)");
     }
 
     @Override
@@ -125,7 +126,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public void insertSavedSouvenir(SouvenirModel souvenirModel) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put("id", souvenirModel.getName());
+        contentValues.put("name", souvenirModel.getName());
         db.insert("SavedSouvenirs", null, contentValues);
     }
 
@@ -172,6 +173,35 @@ public class DBHelper extends SQLiteOpenHelper {
                     .build();
             arrayList.add(attractionModel);
             res.moveToNext();
+        }
+
+        return arrayList;
+    }
+
+    public ArrayList<AttractionModel> getPicturesForSlider() {
+        ArrayList<AttractionModel> arrayList = new ArrayList<>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        @SuppressLint("Recycle") Cursor res = db.rawQuery("select * from Attractions;", null);
+        res.moveToFirst();
+
+        while (!res.isAfterLast()) {
+            AttractionModel attractionModel = new AttractionModel.Builder()
+                    .withId(res.getString(res.getColumnIndex("id")))
+                    .withTitle(res.getString(res.getColumnIndex("title")))
+                    .withImageUrl(res.getString(res.getColumnIndex("imageUrl")))
+                    .withAddress(res.getString(res.getColumnIndex("address")))
+                    .withProvince(res.getString(res.getColumnIndex("province")))
+                    .withType(res.getString(res.getColumnIndex("type")))
+                    .withDescription(res.getString(res.getColumnIndex("description")))
+                    .build();
+            arrayList.add(attractionModel);
+            res.moveToNext();
+        }
+
+        Collections.shuffle(arrayList);
+        while (arrayList.size() > 10) {
+            arrayList.remove(0);
         }
 
         return arrayList;
@@ -237,7 +267,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return arrayList;
     }
 
-    public Boolean isSaved(AttractionModel attractionModel) {
+    public Boolean isSavedAttraction(AttractionModel attractionModel) {
         SQLiteDatabase db = this.getReadableDatabase();
         @SuppressLint("Recycle") Cursor res = db.rawQuery(
                 "select * from SavedAttractions where id = \'" + attractionModel.getId() + "\'", null);
@@ -246,7 +276,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return !res.isAfterLast();
     }
 
-    public void deleteSaved(AttractionModel attractionModel) {
+    public void deleteSavedAttraction(AttractionModel attractionModel) {
         SQLiteDatabase db = this.getReadableDatabase();
         @SuppressLint("Recycle") Cursor res = db.rawQuery(
                 "delete from SavedAttractions where id = \'" + attractionModel.getId() + "\'", null);
@@ -273,6 +303,44 @@ public class DBHelper extends SQLiteOpenHelper {
                     .withDescription(res.getString(res.getColumnIndex("description")))
                     .build();
             arrayList.add(attractionModel);
+            res.moveToNext();
+        }
+        return arrayList;
+    }
+    
+    public Boolean isSavedSouvenir(SouvenirModel SouvenirModel) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        @SuppressLint("Recycle") Cursor res = db.rawQuery(
+                "select * from SavedSouvenirs where name = \'" + SouvenirModel.getName() + "\'", null);
+        res.moveToFirst();
+
+        return !res.isAfterLast();
+    }
+
+    public void deleteSavedSouvenir(SouvenirModel SouvenirModel) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        @SuppressLint("Recycle") Cursor res = db.rawQuery(
+                "delete from SavedSouvenirs where name = \'" + SouvenirModel.getName() + "\'", null);
+        res.moveToFirst();
+    }
+
+    public ArrayList<SouvenirModel> getAllSavedSouvenirs() {
+        ArrayList<SouvenirModel> arrayList = new ArrayList<>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        @SuppressLint("Recycle") Cursor res = db.rawQuery(
+                "select * from SavedSouvenirs " +
+                        "inner join Souvenirs on SavedSouvenirs.name = Souvenirs.name", null);
+        res.moveToFirst();
+
+        while (!res.isAfterLast()) {
+            SouvenirModel SouvenirModel = new SouvenirModel.Builder()
+                    .withName(res.getString(res.getColumnIndex("name")))
+                    .withImageUrl(res.getString(res.getColumnIndex("imageUrl")))
+                    .withProvince(res.getString(res.getColumnIndex("province")))
+                    .withDescription(res.getString(res.getColumnIndex("description")))
+                    .build();
+            arrayList.add(SouvenirModel);
             res.moveToNext();
         }
         return arrayList;

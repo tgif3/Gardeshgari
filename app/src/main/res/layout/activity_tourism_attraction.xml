@@ -35,7 +35,8 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            tools:ignore="MissingConstraints">
+            tools:ignore="MissingConstraints"
+            android:id="@+id/slider">
             <android.support.v4.view.ViewPager
                 android:id="@+id/pager"
                 android:layout_width="fill_parent"

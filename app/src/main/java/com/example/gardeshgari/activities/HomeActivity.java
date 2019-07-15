@@ -1,5 +1,6 @@
 package com.example.gardeshgari.activities;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -10,17 +11,14 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.ContextMenu;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.gardeshgari.DBHelper;
 import com.example.gardeshgari.HorizontalListView;
@@ -37,14 +35,14 @@ import java.util.TimerTask;
 
 import me.relex.circleindicator.CircleIndicator;
 
+@SuppressLint("StaticFieldLeak")
 public class HomeActivity extends AppCompatActivity {
     private static DBHelper dbHelper;
     private static ViewPager mPager;
     private static int currentPage = 0;
-    private ArrayList<String> urls = new ArrayList<>();
+    private ArrayList<AttractionModel> sliderAttractions = new ArrayList<>();
     private static LayoutInflater layoutInflater = null;
     private ArrayList<HorizontalListView> horizontalListViews;
-    private Toolbar toolbar;
 
     private Context context;
 
@@ -53,24 +51,20 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tourism_attraction);
 
-        dbHelper = new DBHelper(this, "database");
-
-        SharedPreferences sharedPreferences = this.getPreferences(Context.MODE_PRIVATE);
-        if (!sharedPreferences.contains("database")) {
-            new InitialClass(dbHelper);
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putBoolean("database", true);
-            editor.apply();
-        }
-        
         context = this;
+        createDatabase();
 
-        toolbar = findViewById(R.id.toolbar);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         horizontalListViews = new ArrayList<>();
         layoutInflater = (LayoutInflater)this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
+        initialUI();
+    }
+
+    private void initialUI() {
         createListView(dbHelper.getAttractionsByType(AttractionType.natural.toString()), "جاذبه‌های طبیعی");
         createListView(dbHelper.getAttractionsByType(AttractionType.coast.toString()), "سواحل شمال و جنوب");
         createListView(dbHelper.getAttractionsByType(AttractionType.health.toString()), "گردشگری و سلامت");
@@ -78,11 +72,11 @@ public class HomeActivity extends AppCompatActivity {
         createListView(dbHelper.getAttractionsByType(AttractionType.museum.toString()), "موزه‌ها");
         createListView(dbHelper.getAttractionsByType(AttractionType.shopping.toString()), "مراکز خرید");
         createListView(dbHelper.getAttractionsByType(AttractionType.amusementPark.toString()), "شهربازی‌ها");
-        init();
+        createSlider();
     }
 
     private void createListView(ArrayList<AttractionModel> attractionModels, String title) {
-        View attractionListView1 = layoutInflater.inflate(R.layout.attraction_list_view, null);
+        @SuppressLint("InflateParams") View attractionListView1 = layoutInflater.inflate(R.layout.attraction_list_view, null);
         HorizontalListView horizontalListView = attractionListView1.findViewById(R.id.HorizontalListView);
         HorizontalAdapter horizontalAdapter = new HorizontalAdapter(this, attractionModels);
         horizontalListView.setAdapter(horizontalAdapter);
@@ -115,20 +109,21 @@ public class HomeActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
-    private void init() {
-        for (int i = 0; i < 10; i++) {
-            urls.add("https://cdn.isna.ir/d/2016/10/20/3/57371326.jpg?ts=1498045331768");
+    private void createSlider() {
+        sliderAttractions = dbHelper.getPicturesForSlider();
+        ArrayList<String> imageUrls = new ArrayList<>();
+        for (AttractionModel attractionModel : sliderAttractions) {
+            imageUrls.add(attractionModel.getImageUrl());
         }
-
         mPager = findViewById(R.id.pager);
-        mPager.setAdapter(new SliderAdapter(this, urls));
+        mPager.setAdapter(new SliderAdapter(this, imageUrls));
         CircleIndicator indicator = findViewById(R.id.indicator);
         indicator.setViewPager(mPager);
 
         final Handler handler = new Handler();
         final Runnable Update = new Runnable() {
             public void run() {
-                if (currentPage == urls.size()) {
+                if (currentPage == sliderAttractions.size()) {
                     currentPage = 0;
                 }
                 mPager.setCurrentItem(currentPage++, true);
@@ -177,16 +172,27 @@ public class HomeActivity extends AppCompatActivity {
         new AlertDialog.Builder(this)
                 .setMessage("آيا مطمئن هستيد كه مي خواهيد از برنامه خارج شويد؟")
                 .setCancelable(false)
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                .setPositiveButton("بله", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         finish();
                     }
                 })
-                .setNegativeButton("No", null)
+                .setNegativeButton("خیر", null)
                 .show();
     }
     
     public static DBHelper getDbHelper() {
         return dbHelper;
+    }
+
+    private void createDatabase() {
+        dbHelper = new DBHelper(this, "database");
+        SharedPreferences sharedPreferences = this.getPreferences(Context.MODE_PRIVATE);
+        if (!sharedPreferences.contains("database")) {
+            new InitialClass(dbHelper);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean("database", true);
+            editor.apply();
+        }
     }
 }

@@ -1,8 +1,6 @@
 package com.example.gardeshgari.activities;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -28,8 +26,17 @@ public class SaveActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_item);
+        setContentView(R.layout.activity_save);
 
+        ArrayList<SouvenirModel> souvenirModelArrayList = HomeActivity.getDbHelper().getAllSavedSouvenirs();
+        ArrayList<AttractionModel> attractionModels = HomeActivity.getDbHelper().getAllSavedAttractions();
+        souvenirAdapter = new SouvenirAdapter(this, souvenirModelArrayList);
+        attractionProvinceAdapter = new AttractionProvinceAdapter(this, attractionModels);
+
+        initializeUI();
+    }
+
+    private void initializeUI() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -38,21 +45,13 @@ public class SaveActivity extends AppCompatActivity {
         TabLayout tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
 
-        setTitle("");
-
-        ArrayList<SouvenirModel> souvenirModelArrayList = HomeActivity.getDbHelper().getSouvenirByProvince("تهران");
-        ArrayList<AttractionModel> attractionModels = HomeActivity.getDbHelper().getAllSavedAttractions();
-        souvenirAdapter = new SouvenirAdapter(this, souvenirModelArrayList);
-        attractionProvinceAdapter = new AttractionProvinceAdapter(this, attractionModels);
         setupViewPager(viewPager);
     }
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        SouvenirFragment souvenirFragment = new SouvenirFragment(souvenirAdapter);
-        AttractionFragment attractionFragment = new AttractionFragment(attractionProvinceAdapter);
-        adapter.addFragment(souvenirFragment, "سوغات ذخیره‌شده");
-        adapter.addFragment(attractionFragment, "جاذبه‌های گردشگری ذخیره‌شده");
+        adapter.addFragment(new SouvenirFragment(souvenirAdapter), "سوغات ذخیره‌شده");
+        adapter.addFragment(new AttractionFragment(attractionProvinceAdapter), "جاذبه‌های گردشگری ذخیره‌شده");
         viewPager.setAdapter(adapter);
     }
 

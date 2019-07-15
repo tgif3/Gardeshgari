@@ -3,19 +3,14 @@ package com.example.gardeshgari.activities;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.gardeshgari.InitialClass;
 import com.example.gardeshgari.Model.AttractionModel;
 import com.example.gardeshgari.Model.PictureModel;
 import com.example.gardeshgari.R;
@@ -82,7 +77,7 @@ public class AttractionActivity extends AppCompatActivity {
         });
 
         final ImageView saveImageView = findViewById(R.id.save);
-        if (HomeActivity.getDbHelper().isSaved(attractionModel)) {
+        if (HomeActivity.getDbHelper().isSavedAttraction(attractionModel)) {
             saveImageView.setImageResource(R.drawable.saved);
         } else {
             saveImageView.setImageResource(R.drawable.unsaved);
@@ -90,8 +85,8 @@ public class AttractionActivity extends AppCompatActivity {
         saveImageView.setOnClickListener(new View.OnClickListener () {
             @Override
             public void onClick(View v) {
-                if (HomeActivity.getDbHelper().isSaved(attractionModel)) {
-                    HomeActivity.getDbHelper().deleteSaved(attractionModel);
+                if (HomeActivity.getDbHelper().isSavedAttraction(attractionModel)) {
+                    HomeActivity.getDbHelper().deleteSavedAttraction(attractionModel);
                     saveImageView.setImageResource(R.drawable.unsaved);
                 } else {
                     HomeActivity.getDbHelper().insertSavedAttraction(attractionModel);

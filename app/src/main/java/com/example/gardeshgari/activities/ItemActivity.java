@@ -26,7 +26,6 @@ import com.example.gardeshgari.fragments.SouvenirFragment;
 import java.util.ArrayList;
 
 public class ItemActivity extends AppCompatActivity {
-    private static LayoutInflater layoutInflater = null;
     private SouvenirAdapter souvenirAdapter;
     private AttractionProvinceAdapter attractionProvinceAdapter;
     private TabLayout tabLayout;
@@ -40,6 +39,15 @@ public class ItemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item);
 
+        ArrayList<SouvenirModel> souvenirModelArrayList = HomeActivity.getDbHelper().getSouvenirByProvince(provinceModel.getName());
+        ArrayList<AttractionModel> attractionModels = HomeActivity.getDbHelper().getAttractionsByProvince(provinceModel.getName());
+        souvenirAdapter = new SouvenirAdapter(this, souvenirModelArrayList);
+        attractionProvinceAdapter = new AttractionProvinceAdapter(this, attractionModels);
+
+        initializeUI();
+    }
+
+    private void initializeUI() {
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -47,14 +55,6 @@ public class ItemActivity extends AppCompatActivity {
 
         tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
-
-        setTitle("استان " + provinceModel.getName());
-
-        layoutInflater = (LayoutInflater)this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        ArrayList<SouvenirModel> souvenirModelArrayList = HomeActivity.getDbHelper().getSouvenirByProvince(provinceModel.getName());
-        ArrayList<AttractionModel> attractionModels = HomeActivity.getDbHelper().getAttractionsByProvince(provinceModel.getName());
-        souvenirAdapter = new SouvenirAdapter(this, souvenirModelArrayList);
-        attractionProvinceAdapter = new AttractionProvinceAdapter(this, attractionModels);
 
         setupViewPager(viewPager);
     }

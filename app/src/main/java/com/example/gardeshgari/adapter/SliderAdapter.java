@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.example.gardeshgari.Model.AttractionModel;
 import com.example.gardeshgari.R;
 import com.example.gardeshgari.imageUtils.ImageLoader;
 
@@ -14,14 +15,12 @@ import java.util.ArrayList;
 
 public class SliderAdapter extends PagerAdapter {
 
-    private ArrayList<String> urls;
+    private ArrayList<String> imageUrls;
     private LayoutInflater inflater;
-    private Context context;
     private ImageLoader imageLoader;
 
-    public SliderAdapter(Context context, ArrayList<String> urls) {
-        this.context = context;
-        this.urls = urls;
+    public SliderAdapter(Context context, ArrayList<String> imageUrls) {
+        this.imageUrls = imageUrls;
         inflater = LayoutInflater.from(context);
         imageLoader = new ImageLoader(context.getApplicationContext());
     }
@@ -33,14 +32,14 @@ public class SliderAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
-        return urls.size();
+        return imageUrls.size();
     }
 
     @Override
     public Object instantiateItem(ViewGroup view, int position) {
         View myImageLayout = inflater.inflate(R.layout.slide, view, false);
         ImageView myImage = myImageLayout.findViewById(R.id.image);
-        imageLoader.DisplayImage(urls.get(position), myImage);
+        imageLoader.DisplayImage(imageUrls.get(position), myImage);
         view.addView(myImageLayout, 0);
 
         return myImageLayout;
