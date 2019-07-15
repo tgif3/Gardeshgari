@@ -1,15 +1,21 @@
 package com.example.gardeshgari.activities;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.gardeshgari.InitialClass;
 import com.example.gardeshgari.Model.AttractionModel;
 import com.example.gardeshgari.Model.PictureModel;
 import com.example.gardeshgari.R;
@@ -29,6 +35,7 @@ public class AttractionActivity extends AppCompatActivity {
     private static AttractionModel attractionModel;
     private static boolean callByHome;
     private android.support.v7.widget.Toolbar toolbar;
+    private Context context;
 
     public static void setAttractionModel(AttractionModel attractionModel) {
         AttractionActivity.attractionModel = attractionModel;
@@ -40,9 +47,11 @@ public class AttractionActivity extends AppCompatActivity {
 
     @SuppressLint("CutPasteId")
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_attraction);
+
+        context = this;
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -55,6 +64,37 @@ public class AttractionActivity extends AppCompatActivity {
         address.setText(attractionModel.getAddress());
         description.setText(attractionModel.getDescription());
         init(attractionModel.getId());
+
+        ImageView shareImageView = findViewById(R.id.share);
+        shareImageView.setOnClickListener(new View.OnClickListener () {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(Intent.ACTION_SEND);
+                myIntent.setType("text/plain");
+                String body = attractionModel.getTitle() + "\n" +
+                        attractionModel.getAddress() + "\n" +
+                        attractionModel.getDescription();
+                String sub = attractionModel.getTitle();
+                myIntent.putExtra(Intent.EXTRA_SUBJECT,sub);
+                myIntent.putExtra(Intent.EXTRA_TEXT,body);
+                startActivity(Intent.createChooser(myIntent, "Share Using"));
+            }
+        });
+
+        final ImageView saveImageView = findViewById(R.id.save);
+        saveImageView.setOnClickListener(new View.OnClickListener () {
+            @Override
+            public void onClick(View v) {
+                if (HomeActivity.getDbHelper().isSaved(attractionModel)) {
+                    HomeActivity.getDbHelper().deleteSaved(attractionModel);
+                    saveImageView.setImageResource(R.drawable.unsaved);
+                } else {
+                    HomeActivity.getDbHelper().insertSavedAttraction(attractionModel);
+                    saveImageView.setImageResource(R.drawable.saved);
+                }
+            }
+        });
+
     }
 
     private void init(String attractionId) {

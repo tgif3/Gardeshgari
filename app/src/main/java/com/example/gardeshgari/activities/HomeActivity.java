@@ -45,6 +45,7 @@ public class HomeActivity extends AppCompatActivity {
     private static LayoutInflater layoutInflater = null;
     private ArrayList<HorizontalListView> horizontalListViews;
     private Toolbar toolbar;
+
     private Context context;
 
     @Override

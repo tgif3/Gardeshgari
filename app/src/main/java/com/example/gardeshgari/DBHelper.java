@@ -27,6 +27,9 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS Attractions");
         db.execSQL("DROP TABLE IF EXISTS Provinces");
         db.execSQL("DROP TABLE IF EXISTS Souvenirs");
+        db.execSQL("DROP TABLE IF EXISTS Pictures");
+        db.execSQL("DROP TABLE IF EXISTS SavedAttractions");
+        db.execSQL("DROP TABLE IF EXISTS SavedSouvenirs");
 
         db.execSQL("CREATE TABLE IF NOT EXISTS Attractions" +
                 "(id INT NOT NULL PRIMARY KEY," +
@@ -51,6 +54,12 @@ public class DBHelper extends SQLiteOpenHelper {
                 "(id INT NOT NULL PRIMARY KEY," +
                 " imageUrl TEXT NOT NULL," +
                 " attractionId INT NOT NULL)");
+
+        db.execSQL("CREATE TABLE IF NOT EXISTS SavedAttractions" +
+                "(id INT NOT NULL PRIMARY KEY)");
+
+        db.execSQL("CREATE TABLE IF NOT EXISTS SavedSouvenirs" +
+                "(id INT NOT NULL PRIMARY KEY)");
     }
 
     @Override
@@ -59,6 +68,8 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS Provinces");
         db.execSQL("DROP TABLE IF EXISTS Souvenirs");
         db.execSQL("DROP TABLE IF EXISTS Pictures");
+        db.execSQL("DROP TABLE IF EXISTS SavedAttractions");
+        db.execSQL("DROP TABLE IF EXISTS SavedSouvenirs");
         onCreate(db);
     }
 
@@ -102,28 +113,18 @@ public class DBHelper extends SQLiteOpenHelper {
         db.insert("Pictures", null, contentValues);
     }
 
-    public ArrayList<AttractionModel> getAllAttractions() {
-        ArrayList<AttractionModel> arrayList = new ArrayList<>();
+    public void insertSavedAttraction(AttractionModel attractionModel) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("id", attractionModel.getId());
+        db.insert("SavedAttractions", null, contentValues);
+    }
 
-        SQLiteDatabase db = this.getReadableDatabase();
-        @SuppressLint("Recycle") Cursor res = db.rawQuery("select * from Attractions;", null);
-        res.moveToFirst();
-
-        while (!res.isAfterLast()) {
-            AttractionModel attractionModel = new AttractionModel.Builder()
-                    .withId(res.getString(res.getColumnIndex("id")))
-                    .withTitle(res.getString(res.getColumnIndex("title")))
-                    .withImageUrl(res.getString(res.getColumnIndex("imageUrl")))
-                    .withAddress(res.getString(res.getColumnIndex("address")))
-                    .withProvince(res.getString(res.getColumnIndex("province")))
-                    .withType(res.getString(res.getColumnIndex("type")))
-                    .withDescription(res.getString(res.getColumnIndex("description")))
-                    .build();
-            arrayList.add(attractionModel);
-            res.moveToNext();
-        }
-
-        return arrayList;
+    public void insertSavedSouvenir(SouvenirModel souvenirModel) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("id", souvenirModel.getName());
+        db.insert("SavedSouvenirs", null, contentValues);
     }
 
     public ArrayList<AttractionModel> getAttractionsByProvince(String province) {
@@ -231,6 +232,47 @@ public class DBHelper extends SQLiteOpenHelper {
             res.moveToNext();
         }
 
+        return arrayList;
+    }
+
+    public Boolean isSaved(AttractionModel attractionModel) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        @SuppressLint("Recycle") Cursor res = db.rawQuery(
+                "select * from SavedAttractions where id = \'" + attractionModel.getId() + "\'", null);
+        res.moveToFirst();
+
+        return !res.isAfterLast();
+    }
+
+    public void deleteSaved(AttractionModel attractionModel) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        @SuppressLint("Recycle") Cursor res = db.rawQuery(
+                "delete from SavedAttractions where id = \'" + attractionModel.getId() + "\'", null);
+        res.moveToFirst();
+    }
+
+    public ArrayList<AttractionModel> getAllSavedAttractions() {
+        ArrayList<AttractionModel> arrayList = new ArrayList<>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        @SuppressLint("Recycle") Cursor res = db.rawQuery(
+                "select Pictures.* from SavedAttractions " +
+                        "inner join Pictures on SavedAttractions.id = Pictures.id", null);
+        res.moveToFirst();
+
+        while (!res.isAfterLast()) {
+            AttractionModel attractionModel = new AttractionModel.Builder()
+                    .withId(res.getString(res.getColumnIndex("id")))
+                    .withTitle(res.getString(res.getColumnIndex("title")))
+                    .withImageUrl(res.getString(res.getColumnIndex("imageUrl")))
+                    .withAddress(res.getString(res.getColumnIndex("address")))
+                    .withProvince(res.getString(res.getColumnIndex("province")))
+                    .withType(res.getString(res.getColumnIndex("type")))
+                    .withDescription(res.getString(res.getColumnIndex("description")))
+                    .build();
+            arrayList.add(attractionModel);
+            res.moveToNext();
+        }
         return arrayList;
     }
 }
