@@ -13,7 +13,6 @@ import com.example.gardeshgari.Model.AttractionModel;
 import com.example.gardeshgari.R;
 import com.example.gardeshgari.activities.AttractionActivity;
 import com.example.gardeshgari.activities.ItemActivity;
-import com.example.gardeshgari.activities.MainActivity;
 
 public class AttractionFragment extends Fragment {
 

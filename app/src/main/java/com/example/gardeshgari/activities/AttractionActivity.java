@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
-import android.widget.Toolbar;
 
 import com.example.gardeshgari.Model.AttractionModel;
 import com.example.gardeshgari.Model.PictureModel;
@@ -59,7 +58,7 @@ public class AttractionActivity extends AppCompatActivity {
     }
 
     private void init(String attractionId) {
-        ArrayList<PictureModel> pictureModels = MainActivity.getDbHelper().getAllPicturesByAttractionId(attractionId);
+        ArrayList<PictureModel> pictureModels = HomeActivity.getDbHelper().getAllPicturesByAttractionId(attractionId);
         urls = new ArrayList<>();
         for (PictureModel pictureModel : pictureModels) {
             urls.add(pictureModel.getImageUrl());
@@ -89,27 +88,27 @@ public class AttractionActivity extends AppCompatActivity {
         }, 0, 3000);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        if (callByHome) {
-            getMenuInflater().inflate(R.menu.home_menu, menu);
-        } else {
-            getMenuInflater().inflate(R.menu.province_menu, menu);
-        }
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.province) {
-            Intent intent = new Intent(this, ProvinceActivity.class);
-            startActivity(intent);
-            return true;
-        } else if (id == R.id.home) {
-            Intent intent = new Intent(this, TourismAttractionActivity.class);
-            startActivity(intent);
-        }
-        return false;
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        if (callByHome) {
+//            getMenuInflater().inflate(R.menu.home_menu, menu);
+//        } else {
+//            getMenuInflater().inflate(R.menu.province_menu, menu);
+//        }
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        int id = item.getItemId();
+//        if (id == R.id.province) {
+//            Intent intent = new Intent(this, ProvinceActivity.class);
+//            startActivity(intent);
+//            return true;
+//        } else if (id == R.id.home) {
+//            Intent intent = new Intent(this, HomeActivity.class);
+//            startActivity(intent);
+//        }
+//        return false;
+//    }
 }
