@@ -29,6 +29,10 @@ public class SouvenirAdapter extends BaseAdapter {
         imageLoader = new ImageLoader(context.getApplicationContext());
     }
 
+    public void setSouvenirModels(ArrayList<SouvenirModel> souvenirModels) {
+        this.souvenirModels = souvenirModels;
+    }
+
     @Override
     public int getViewTypeCount() {
         return getCount();

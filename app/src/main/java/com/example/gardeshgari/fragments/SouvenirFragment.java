@@ -1,5 +1,6 @@
 package com.example.gardeshgari.fragments;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -8,14 +9,22 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.example.gardeshgari.R;
-import com.example.gardeshgari.activities.ItemActivity;
+import com.example.gardeshgari.adapter.SouvenirAdapter;
 
+@SuppressLint("ValidFragment")
 public class SouvenirFragment extends Fragment {
 
     private View view;
     private ListView listView;
+    private SouvenirAdapter souvenirAdapter;
 
-    public SouvenirFragment() {}
+    public SouvenirFragment(SouvenirAdapter souvenirAdapter) {
+        this.souvenirAdapter = souvenirAdapter;
+    }
+
+    public void setSouvenirAdapter(SouvenirAdapter souvenirAdapter) {
+        this.souvenirAdapter = souvenirAdapter;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -28,8 +37,8 @@ public class SouvenirFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_souvenir, container, false);
 
         listView = view.findViewById(R.id.listView);
-        if (ItemActivity.getSouvenirAdapter().getCount() > 0) {
-            listView.setAdapter(ItemActivity.getSouvenirAdapter());
+        if (souvenirAdapter.getCount() > 0) {
+            listView.setAdapter(souvenirAdapter);
         }
 
         return view;

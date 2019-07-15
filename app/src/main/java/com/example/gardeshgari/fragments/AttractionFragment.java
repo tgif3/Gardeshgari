@@ -1,5 +1,6 @@
 package com.example.gardeshgari.fragments;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,13 +14,22 @@ import com.example.gardeshgari.Model.AttractionModel;
 import com.example.gardeshgari.R;
 import com.example.gardeshgari.activities.AttractionActivity;
 import com.example.gardeshgari.activities.ItemActivity;
+import com.example.gardeshgari.adapter.AttractionProvinceAdapter;
 
+@SuppressLint("ValidFragment")
 public class AttractionFragment extends Fragment {
 
     private View view;
     private ListView listView;
+    private AttractionProvinceAdapter attractionProvinceAdapter;
 
-    public AttractionFragment() {}
+    public AttractionFragment(AttractionProvinceAdapter attractionProvinceAdapter) {
+        this.attractionProvinceAdapter = attractionProvinceAdapter;
+    }
+
+    public void setAttractionProvinceAdapter(AttractionProvinceAdapter attractionProvinceAdapter) {
+        this.attractionProvinceAdapter = attractionProvinceAdapter;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -32,22 +42,21 @@ public class AttractionFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_attraction, container, false);
 
         listView = view.findViewById(R.id.listView);
-        if (ItemActivity.getAttractionProvinceAdapter().getCount() > 0) {
-            listView.setAdapter(ItemActivity.getAttractionProvinceAdapter());
+        if (attractionProvinceAdapter.getCount() > 0) {
+            listView.setAdapter(attractionProvinceAdapter);
         }
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView parent, View view, int position, long id) {
-                AttractionModel attractionModel = (AttractionModel)
-                        ItemActivity.getAttractionProvinceAdapter().getItem(position);
+                AttractionModel attractionModel =
+                        (AttractionModel) attractionProvinceAdapter.getItem(position);
                 AttractionActivity.setAttractionModel(attractionModel);
                 AttractionActivity.setCallByHome(false);
                 Intent intent = new Intent(getActivity(), AttractionActivity.class);
                 startActivity(intent);
             }
         });
-
 
         return view;
     }

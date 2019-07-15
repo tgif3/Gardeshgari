@@ -8,13 +8,8 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.KeyEvent;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 
 import com.example.gardeshgari.Model.AttractionModel;
-import com.example.gardeshgari.Model.ProvinceModel;
 import com.example.gardeshgari.Model.SouvenirModel;
 import com.example.gardeshgari.R;
 import com.example.gardeshgari.adapter.AttractionProvinceAdapter;
@@ -25,14 +20,9 @@ import com.example.gardeshgari.fragments.SouvenirFragment;
 
 import java.util.ArrayList;
 
-public class ItemActivity extends AppCompatActivity {
-    private static LayoutInflater layoutInflater = null;
+public class SaveActivity extends AppCompatActivity {
     private SouvenirAdapter souvenirAdapter;
     private AttractionProvinceAdapter attractionProvinceAdapter;
-    private TabLayout tabLayout;
-    public ViewPager viewPager;
-    private Toolbar toolbar;
-    private static ProvinceModel provinceModel;
 
     @SuppressLint("CutPasteId")
     @Override
@@ -40,33 +30,36 @@ public class ItemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item);
 
-        toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        viewPager = findViewById(R.id.viewpager);
+        ViewPager viewPager = findViewById(R.id.viewpager);
 
-        tabLayout = findViewById(R.id.tabs);
+        TabLayout tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
 
-        setTitle("استان " + provinceModel.getName());
+        setTitle("");
 
-        layoutInflater = (LayoutInflater)this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        ArrayList<SouvenirModel> souvenirModelArrayList = HomeActivity.getDbHelper().getSouvenirByProvince(provinceModel.getName());
-        ArrayList<AttractionModel> attractionModels = HomeActivity.getDbHelper().getAttractionsByProvince(provinceModel.getName());
+        ArrayList<SouvenirModel> souvenirModelArrayList = HomeActivity.getDbHelper().getSouvenirByProvince("تهران");
+        ArrayList<AttractionModel> attractionModels = HomeActivity.getDbHelper().getAllSavedAttractions();
         souvenirAdapter = new SouvenirAdapter(this, souvenirModelArrayList);
         attractionProvinceAdapter = new AttractionProvinceAdapter(this, attractionModels);
-
         setupViewPager(viewPager);
     }
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new SouvenirFragment(souvenirAdapter), "سوغات");
-        adapter.addFragment(new AttractionFragment(attractionProvinceAdapter), "جاذبه‌های گردشگری");
+        SouvenirFragment souvenirFragment = new SouvenirFragment(souvenirAdapter);
+        AttractionFragment attractionFragment = new AttractionFragment(attractionProvinceAdapter);
+        adapter.addFragment(souvenirFragment, "سوغات ذخیره‌شده");
+        adapter.addFragment(attractionFragment, "جاذبه‌های گردشگری ذخیره‌شده");
         viewPager.setAdapter(adapter);
     }
 
-    public static void setProvinceModel(ProvinceModel provinceModel) {
-        ItemActivity.provinceModel = provinceModel;
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        finish();
+        startActivity(getIntent());
     }
 }

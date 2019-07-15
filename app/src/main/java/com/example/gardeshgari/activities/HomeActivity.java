@@ -154,6 +154,9 @@ public class HomeActivity extends AppCompatActivity {
         if (item.getItemId() == R.id.province) {
             Intent intent = new Intent(this, ProvinceActivity.class);
             startActivity(intent);
+        } else if (item.getItemId() == R.id.save) {
+            Intent intent = new Intent(this, SaveActivity.class);
+            startActivity(intent);
         }
         return super.onContextItemSelected(item);
     }

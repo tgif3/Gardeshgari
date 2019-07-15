@@ -8,5 +8,11 @@
         android:title="استان"
         android:icon="@drawable/province"
         app:showAsAction="always" />
+    <item
+        android:id="@+id/save"
+        android:orderInCategory="100"
+        android:title="ذخیره"
+        android:icon="@drawable/saved"
+        app:showAsAction="always" />
 
 </menu>

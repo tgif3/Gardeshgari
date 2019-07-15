@@ -3,9 +3,11 @@ package com.example.gardeshgari;
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.example.gardeshgari.Model.AttractionModel;
 import com.example.gardeshgari.Model.ProvinceModel;
@@ -256,8 +258,8 @@ public class DBHelper extends SQLiteOpenHelper {
 
         SQLiteDatabase db = this.getReadableDatabase();
         @SuppressLint("Recycle") Cursor res = db.rawQuery(
-                "select Pictures.* from SavedAttractions " +
-                        "inner join Pictures on SavedAttractions.id = Pictures.id", null);
+                "select * from SavedAttractions " +
+                        "inner join Attractions on SavedAttractions.id = Attractions.id", null);
         res.moveToFirst();
 
         while (!res.isAfterLast()) {

@@ -22,6 +22,10 @@ public class AttractionProvinceAdapter extends BaseAdapter {
     private static LayoutInflater inflater=null;
     private ImageLoader imageLoader;
 
+    public void setAttractionModels(ArrayList<AttractionModel> attractionModels) {
+        this.attractionModels = attractionModels;
+    }
+
     public AttractionProvinceAdapter(Context context, ArrayList<AttractionModel> attractionModels) {
         this.context = context;
         this.attractionModels = attractionModels;

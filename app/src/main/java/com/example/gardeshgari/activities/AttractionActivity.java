@@ -82,6 +82,11 @@ public class AttractionActivity extends AppCompatActivity {
         });
 
         final ImageView saveImageView = findViewById(R.id.save);
+        if (HomeActivity.getDbHelper().isSaved(attractionModel)) {
+            saveImageView.setImageResource(R.drawable.saved);
+        } else {
+            saveImageView.setImageResource(R.drawable.unsaved);
+        }
         saveImageView.setOnClickListener(new View.OnClickListener () {
             @Override
             public void onClick(View v) {
