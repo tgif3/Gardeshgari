@@ -1,13 +1,13 @@
 package com.example.gardeshgari.adapter;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.example.gardeshgari.Model.AttractionModel;
 import com.example.gardeshgari.R;
 import com.example.gardeshgari.imageUtils.ImageLoader;
 
@@ -26,7 +26,7 @@ public class SliderAdapter extends PagerAdapter {
     }
 
     @Override
-    public void destroyItem(ViewGroup container, int position, Object object) {
+    public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
         container.removeView((View) object);
     }
 
@@ -35,8 +35,9 @@ public class SliderAdapter extends PagerAdapter {
         return imageUrls.size();
     }
 
+    @NonNull
     @Override
-    public Object instantiateItem(ViewGroup view, int position) {
+    public Object instantiateItem(@NonNull ViewGroup view, int position) {
         View myImageLayout = inflater.inflate(R.layout.slide, view, false);
         ImageView myImage = myImageLayout.findViewById(R.id.image);
         imageLoader.DisplayImage(imageUrls.get(position), myImage);
@@ -46,7 +47,7 @@ public class SliderAdapter extends PagerAdapter {
     }
 
     @Override
-    public boolean isViewFromObject(View view, Object object) {
+    public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
         return view.equals(object);
     }
 }

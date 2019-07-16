@@ -22,7 +22,7 @@ import android.widget.TextView;
 
 import com.example.gardeshgari.DBHelper;
 import com.example.gardeshgari.HorizontalListView;
-import com.example.gardeshgari.initializeClass;
+import com.example.gardeshgari.DataClass;
 import com.example.gardeshgari.Model.AttractionModel;
 import com.example.gardeshgari.Model.AttractionType;
 import com.example.gardeshgari.R;
@@ -37,11 +37,10 @@ import me.relex.circleindicator.CircleIndicator;
 
 @SuppressLint("StaticFieldLeak")
 public class HomeActivity extends AppCompatActivity {
-    private static DBHelper dbHelper;
-    private static ViewPager mPager;
-    private static int currentPage = 0;
+    private ViewPager mPager;
+    private int currentPage = 0;
     private ArrayList<AttractionModel> sliderAttractions = new ArrayList<>();
-    private static LayoutInflater layoutInflater = null;
+    private LayoutInflater layoutInflater = null;
     private ArrayList<HorizontalListView> horizontalListViews;
 
     private Context context;
@@ -56,11 +55,7 @@ public class HomeActivity extends AppCompatActivity {
         setTitle("Gardeshgari");
 
         createDatabase();
-
-
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
+        
         horizontalListViews = new ArrayList<>();
         layoutInflater = (LayoutInflater)this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
@@ -68,13 +63,16 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void initialUI() {
-        createListView(dbHelper.getAttractionsByType(AttractionType.natural.toString()), "جاذبه‌های طبیعی");
-        createListView(dbHelper.getAttractionsByType(AttractionType.coast.toString()), "سواحل شمال و جنوب");
-        createListView(dbHelper.getAttractionsByType(AttractionType.health.toString()), "گردشگری و سلامت");
-        createListView(dbHelper.getAttractionsByType(AttractionType.historical.toString()), "تاریخی و فرهنگی");
-        createListView(dbHelper.getAttractionsByType(AttractionType.museum.toString()), "موزه‌ها");
-        createListView(dbHelper.getAttractionsByType(AttractionType.shopping.toString()), "مراکز خرید");
-        createListView(dbHelper.getAttractionsByType(AttractionType.amusementPark.toString()), "شهربازی‌ها");
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        createListView(DataClass.getInstance().getDbHelper().getAttractionsByType(AttractionType.natural.toString()), "جاذبه‌های طبیعی");
+        createListView(DataClass.getInstance().getDbHelper().getAttractionsByType(AttractionType.coast.toString()), "سواحل شمال و جنوب");
+        createListView(DataClass.getInstance().getDbHelper().getAttractionsByType(AttractionType.health.toString()), "گردشگری و سلامت");
+        createListView(DataClass.getInstance().getDbHelper().getAttractionsByType(AttractionType.historical.toString()), "تاریخی و فرهنگی");
+        createListView(DataClass.getInstance().getDbHelper().getAttractionsByType(AttractionType.museum.toString()), "موزه‌ها");
+        createListView(DataClass.getInstance().getDbHelper().getAttractionsByType(AttractionType.shopping.toString()), "مراکز خرید");
+        createListView(DataClass.getInstance().getDbHelper().getAttractionsByType(AttractionType.amusementPark.toString()), "شهربازی‌ها");
         createSlider();
     }
 
@@ -92,7 +90,7 @@ public class HomeActivity extends AppCompatActivity {
             public void onItemClick(AdapterView parent, View view, int position, long id) {
                 AttractionModel attractionModel = (AttractionModel)
                         parent.getAdapter().getItem(position);
-                AttractionActivity.setAttractionModel(attractionModel);
+                DataClass.getInstance().setAttractionModel(attractionModel);
                 Intent intent = new Intent(context, AttractionActivity.class);
                 startActivity(intent);
             }
@@ -112,7 +110,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void createSlider() {
-        sliderAttractions = dbHelper.getPicturesForSlider();
+        sliderAttractions = DataClass.getInstance().getDbHelper().getPicturesForSlider();
         ArrayList<String> imageUrls = new ArrayList<>();
         for (AttractionModel attractionModel : sliderAttractions) {
             imageUrls.add(attractionModel.getImageUrl());
@@ -151,7 +149,7 @@ public class HomeActivity extends AppCompatActivity {
         Intent intent;
         switch (item.getItemId()) {
             case R.id.province:
-                intent = new Intent(this, ProvinceActivity.class);
+                intent = new Intent(this, ProvinceListActivity.class);
                 startActivity(intent);
                 break;
             case R.id.save:
@@ -190,19 +188,17 @@ public class HomeActivity extends AppCompatActivity {
                 .setNegativeButton("خیر", null)
                 .show();
     }
-    
-    public static DBHelper getDbHelper() {
-        return dbHelper;
-    }
 
     private void createDatabase() {
-        dbHelper = new DBHelper(this, "database");
+        DBHelper dbHelper = new DBHelper(this, "database");
         SharedPreferences sharedPreferences = this.getPreferences(Context.MODE_PRIVATE);
         if (!sharedPreferences.contains("database")) {
-            new initializeClass(dbHelper);
+            DataClass.getInstance(dbHelper).initialize();
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putBoolean("database", true);
             editor.apply();
+        } else {
+            DataClass.getInstance(dbHelper);
         }
     }
 }

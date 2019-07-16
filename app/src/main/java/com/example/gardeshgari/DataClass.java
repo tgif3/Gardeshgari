@@ -6,12 +6,35 @@ import com.example.gardeshgari.Model.PictureModel;
 import com.example.gardeshgari.Model.ProvinceModel;
 import com.example.gardeshgari.Model.SouvenirModel;
 
-public class initializeClass {
+public class DataClass {
     
     private DBHelper dbHelper;
+    private AttractionModel attractionModel;
+    private SouvenirModel souvenirModel;
+    private ProvinceModel provinceModel;
+
+    private static DataClass INSTANCE = null;
+
+    public static DataClass getInstance(DBHelper dbHelper) {
+        if(INSTANCE == null) {
+            INSTANCE = new DataClass(dbHelper);
+        }
+        return INSTANCE;
+    }
+
+    public static DataClass getInstance() {
+        return INSTANCE;
+    }
     
-    public initializeClass(DBHelper dbHelper) {
+    private DataClass(DBHelper dbHelper) {
         this.dbHelper = dbHelper;
+    }
+
+    public DBHelper getDbHelper() {
+        return dbHelper;
+    }
+
+    public void initialize() {
         insertNaturalAttractions();
         insertCoastAttractions();
         insertPictures();
@@ -1737,5 +1760,29 @@ public class initializeClass {
                 .withAttractionId("1")
                 .build();
         dbHelper.insertPicture(pictureModel);
+    }
+
+    public AttractionModel getAttractionModel() {
+        return attractionModel;
+    }
+
+    public void setAttractionModel(AttractionModel attractionModel) {
+        this.attractionModel = attractionModel;
+    }
+
+    public SouvenirModel getSouvenirModel() {
+        return souvenirModel;
+    }
+
+    public void setSouvenirModel(SouvenirModel souvenirModel) {
+        this.souvenirModel = souvenirModel;
+    }
+
+    public ProvinceModel getProvinceModel() {
+        return provinceModel;
+    }
+
+    public void setProvinceModel(ProvinceModel provinceModel) {
+        this.provinceModel = provinceModel;
     }
 }

@@ -1,5 +1,6 @@
 package com.example.gardeshgari.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,14 +17,12 @@ import java.util.ArrayList;
 
 public class HorizontalAdapter extends BaseAdapter {
 
-    private Context context;
     private ArrayList<AttractionModel> attractionModels;
 
-    private static LayoutInflater inflater=null;
+    private LayoutInflater inflater;
     private ImageLoader imageLoader;
 
     public HorizontalAdapter(Context context, ArrayList<AttractionModel> attractionModels) {
-        this.context = context;
         this.attractionModels = attractionModels;
         inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         imageLoader = new ImageLoader(context.getApplicationContext());
@@ -54,10 +53,11 @@ public class HorizontalAdapter extends BaseAdapter {
         return 0;
     }
 
+    @SuppressLint("InflateParams")
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = convertView;
         if(convertView == null)
-            view = inflater.inflate(R.layout.attraction, null);
+            view = inflater.inflate(R.layout.attraction_in_home, null);
 
         TextView text = view.findViewById(R.id.text);
         ImageView image = view.findViewById(R.id.image);

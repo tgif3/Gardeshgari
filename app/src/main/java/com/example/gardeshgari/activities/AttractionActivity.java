@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.gardeshgari.Model.AttractionModel;
+import com.example.gardeshgari.DataClass;
 import com.example.gardeshgari.Model.PictureModel;
 import com.example.gardeshgari.R;
 import com.example.gardeshgari.adapter.SliderAdapter;
@@ -24,13 +24,8 @@ import me.relex.circleindicator.CircleIndicator;
 
 public class AttractionActivity extends AppCompatActivity {
     private ArrayList<String> urls;
-    private static ViewPager mPager;
-    private static int currentPage = 0;
-    private static AttractionModel attractionModel;
-
-    public static void setAttractionModel(AttractionModel attractionModel) {
-        AttractionActivity.attractionModel = attractionModel;
-    }
+    private ViewPager mPager;
+    private int currentPage = 0;
 
     @SuppressLint("CutPasteId")
     @Override
@@ -46,10 +41,10 @@ public class AttractionActivity extends AppCompatActivity {
         TextView address = findViewById(R.id.address);
         TextView description = findViewById(R.id.description);
 
-        name.setText(attractionModel.getTitle());
-        address.setText(attractionModel.getAddress());
-        description.setText(attractionModel.getDescription());
-        createSlider(attractionModel.getId());
+        name.setText(DataClass.getInstance().getAttractionModel().getTitle());
+        address.setText(DataClass.getInstance().getAttractionModel().getAddress());
+        description.setText(DataClass.getInstance().getAttractionModel().getDescription());
+        createSlider(DataClass.getInstance().getAttractionModel().getId());
 
         ImageView shareImageView = findViewById(R.id.share);
         shareImageView.setOnClickListener(new View.OnClickListener() {
@@ -57,10 +52,10 @@ public class AttractionActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent myIntent = new Intent(Intent.ACTION_SEND);
                 myIntent.setType("text/plain");
-                String body = attractionModel.getTitle() + "\n" +
-                        attractionModel.getAddress() + "\n" +
-                        attractionModel.getDescription();
-                String sub = attractionModel.getTitle();
+                String body = DataClass.getInstance().getAttractionModel().getTitle() + "\n" +
+                        DataClass.getInstance().getAttractionModel().getAddress() + "\n" +
+                        DataClass.getInstance().getAttractionModel().getDescription();
+                String sub = DataClass.getInstance().getAttractionModel().getTitle();
                 myIntent.putExtra(Intent.EXTRA_SUBJECT, sub);
                 myIntent.putExtra(Intent.EXTRA_TEXT, body);
                 startActivity(Intent.createChooser(myIntent, "Share Using"));
@@ -68,7 +63,7 @@ public class AttractionActivity extends AppCompatActivity {
         });
 
         final ImageView saveImageView = findViewById(R.id.save);
-        if (HomeActivity.getDbHelper().isSavedAttraction(attractionModel)) {
+        if (DataClass.getInstance().getDbHelper().isSavedAttraction(DataClass.getInstance().getAttractionModel())) {
             saveImageView.setImageResource(R.drawable.saved);
         } else {
             saveImageView.setImageResource(R.drawable.unsaved);
@@ -76,11 +71,11 @@ public class AttractionActivity extends AppCompatActivity {
         saveImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (HomeActivity.getDbHelper().isSavedAttraction(attractionModel)) {
-                    HomeActivity.getDbHelper().deleteSavedAttraction(attractionModel);
+                if (DataClass.getInstance().getDbHelper().isSavedAttraction(DataClass.getInstance().getAttractionModel())) {
+                    DataClass.getInstance().getDbHelper().deleteSavedAttraction(DataClass.getInstance().getAttractionModel());
                     saveImageView.setImageResource(R.drawable.unsaved);
                 } else {
-                    HomeActivity.getDbHelper().insertSavedAttraction(attractionModel);
+                    DataClass.getInstance().getDbHelper().insertSavedAttraction(DataClass.getInstance().getAttractionModel());
                     saveImageView.setImageResource(R.drawable.saved);
                 }
             }
@@ -88,12 +83,12 @@ public class AttractionActivity extends AppCompatActivity {
     }
 
     private void createSlider(String attractionId) {
-        ArrayList<PictureModel> pictureModels = HomeActivity.getDbHelper().getAllPicturesByAttractionId(attractionId);
+        ArrayList<PictureModel> pictureModels = DataClass.getInstance().getDbHelper().getAllPicturesByAttractionId(attractionId);
         urls = new ArrayList<>();
         for (PictureModel pictureModel : pictureModels) {
             urls.add(pictureModel.getImageUrl());
         }
-        urls.add(attractionModel.getImageUrl());
+        urls.add(DataClass.getInstance().getAttractionModel().getImageUrl());
 
         mPager = findViewById(R.id.pager);
         mPager.setAdapter(new SliderAdapter(this, urls));

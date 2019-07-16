@@ -10,21 +10,21 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.gardeshgari.DataClass;
 import com.example.gardeshgari.Model.AttractionModel;
 import com.example.gardeshgari.R;
-import com.example.gardeshgari.activities.HomeActivity;
 import com.example.gardeshgari.imageUtils.ImageLoader;
 
 import java.util.ArrayList;
 
-public class AttractionProvinceAdapter extends BaseAdapter {
+public class AttractionAdapter extends BaseAdapter {
     private Context context;
     private ArrayList<AttractionModel> attractionModels;
 
-    private static LayoutInflater inflater=null;
+    private LayoutInflater inflater;
     private ImageLoader imageLoader;
 
-    public AttractionProvinceAdapter(Context context, ArrayList<AttractionModel> attractionModels) {
+    public AttractionAdapter(Context context, ArrayList<AttractionModel> attractionModels) {
         this.context = context;
         this.attractionModels = attractionModels;
         inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -67,7 +67,7 @@ public class AttractionProvinceAdapter extends BaseAdapter {
         ImageView image = view.findViewById(R.id.image);
 
         final ImageView saveImageView = view.findViewById(R.id.save);
-        if (HomeActivity.getDbHelper().isSavedAttraction(attractionModels.get(position))) {
+        if (DataClass.getInstance().getDbHelper().isSavedAttraction(attractionModels.get(position))) {
             saveImageView.setImageResource(R.drawable.saved);
         } else {
             saveImageView.setImageResource(R.drawable.unsaved);
@@ -75,11 +75,11 @@ public class AttractionProvinceAdapter extends BaseAdapter {
         saveImageView.setOnClickListener(new View.OnClickListener () {
             @Override
             public void onClick(View v) {
-                if (HomeActivity.getDbHelper().isSavedAttraction(attractionModels.get(position))) {
-                    HomeActivity.getDbHelper().deleteSavedAttraction(attractionModels.get(position));
+                if (DataClass.getInstance().getDbHelper().isSavedAttraction(attractionModels.get(position))) {
+                    DataClass.getInstance().getDbHelper().deleteSavedAttraction(attractionModels.get(position));
                     saveImageView.setImageResource(R.drawable.unsaved);
                 } else {
-                    HomeActivity.getDbHelper().insertSavedAttraction(attractionModels.get(position));
+                    DataClass.getInstance().getDbHelper().insertSavedAttraction(attractionModels.get(position));
                     saveImageView.setImageResource(R.drawable.saved);
                 }
             }

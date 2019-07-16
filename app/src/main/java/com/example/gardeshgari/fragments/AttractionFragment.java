@@ -11,18 +11,19 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.example.gardeshgari.DataClass;
 import com.example.gardeshgari.Model.AttractionModel;
 import com.example.gardeshgari.R;
 import com.example.gardeshgari.activities.AttractionActivity;
-import com.example.gardeshgari.adapter.AttractionProvinceAdapter;
+import com.example.gardeshgari.adapter.AttractionAdapter;
 
 @SuppressLint("ValidFragment")
 public class AttractionFragment extends Fragment {
     private ListView listView;
-    private AttractionProvinceAdapter attractionProvinceAdapter;
+    private AttractionAdapter attractionAdapter;
 
-    public AttractionFragment(AttractionProvinceAdapter attractionProvinceAdapter) {
-        this.attractionProvinceAdapter = attractionProvinceAdapter;
+    public AttractionFragment(AttractionAdapter attractionAdapter) {
+        this.attractionAdapter = attractionAdapter;
     }
 
     @Override
@@ -36,16 +37,16 @@ public class AttractionFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_attraction, container, false);
 
         listView = view.findViewById(R.id.listView);
-        if (attractionProvinceAdapter.getCount() > 0) {
-            listView.setAdapter(attractionProvinceAdapter);
+        if (attractionAdapter.getCount() > 0) {
+            listView.setAdapter(attractionAdapter);
         }
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView parent, View view, int position, long id) {
                 AttractionModel attractionModel =
-                        (AttractionModel) attractionProvinceAdapter.getItem(position);
-                AttractionActivity.setAttractionModel(attractionModel);
+                        (AttractionModel) attractionAdapter.getItem(position);
+                DataClass.getInstance().setAttractionModel(attractionModel);
                 Intent intent = new Intent(getActivity(), AttractionActivity.class);
                 startActivity(intent);
             }

@@ -18,8 +18,8 @@
         <activity android:name=".activities.SouvenirActivity"></activity>
         <activity android:name=".activities.SaveActivity" />
         <activity android:name=".activities.AttractionActivity" />
+        <activity android:name=".activities.ProvinceListActivity" />
         <activity android:name=".activities.ProvinceActivity" />
-        <activity android:name=".activities.ItemActivity" />
         <activity android:name=".activities.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

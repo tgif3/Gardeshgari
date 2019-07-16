@@ -1,5 +1,6 @@
 package com.example.gardeshgari.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -9,9 +10,9 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.gardeshgari.DataClass;
 import com.example.gardeshgari.Model.SouvenirModel;
 import com.example.gardeshgari.R;
-import com.example.gardeshgari.activities.HomeActivity;
 import com.example.gardeshgari.activities.SouvenirActivity;
 import com.example.gardeshgari.imageUtils.ImageLoader;
 
@@ -22,7 +23,7 @@ public class SouvenirAdapter extends BaseAdapter {
     private Context context;
     private ArrayList<SouvenirModel> souvenirModels;
 
-    private static LayoutInflater inflater=null;
+    private LayoutInflater inflater;
     private ImageLoader imageLoader;
 
     public SouvenirAdapter(Context context, ArrayList<SouvenirModel> souvenirModels) {
@@ -57,6 +58,7 @@ public class SouvenirAdapter extends BaseAdapter {
         return 0;
     }
 
+    @SuppressLint("InflateParams")
     public View getView(final int position, View convertView, ViewGroup parent) {
         View view = convertView;
         if(convertView == null)
@@ -66,7 +68,7 @@ public class SouvenirAdapter extends BaseAdapter {
         ImageView image = view.findViewById(R.id.image);
 
         final ImageView saveImageView = view.findViewById(R.id.save);
-        if (HomeActivity.getDbHelper().isSavedSouvenir(souvenirModels.get(position))) {
+        if (DataClass.getInstance().getDbHelper().isSavedSouvenir(souvenirModels.get(position))) {
             saveImageView.setImageResource(R.drawable.saved);
         } else {
             saveImageView.setImageResource(R.drawable.unsaved);
@@ -74,11 +76,11 @@ public class SouvenirAdapter extends BaseAdapter {
         saveImageView.setOnClickListener(new View.OnClickListener () {
             @Override
             public void onClick(View v) {
-                if (HomeActivity.getDbHelper().isSavedSouvenir(souvenirModels.get(position))) {
-                    HomeActivity.getDbHelper().deleteSavedSouvenir(souvenirModels.get(position));
+                if (DataClass.getInstance().getDbHelper().isSavedSouvenir(souvenirModels.get(position))) {
+                    DataClass.getInstance().getDbHelper().deleteSavedSouvenir(souvenirModels.get(position));
                     saveImageView.setImageResource(R.drawable.unsaved);
                 } else {
-                    HomeActivity.getDbHelper().insertSavedSouvenir(souvenirModels.get(position));
+                    DataClass.getInstance().getDbHelper().insertSavedSouvenir(souvenirModels.get(position));
                     saveImageView.setImageResource(R.drawable.saved);
                 }
             }
@@ -106,7 +108,7 @@ public class SouvenirAdapter extends BaseAdapter {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SouvenirActivity.setSouvenirModel(souvenirModels.get(position));
+                DataClass.getInstance().setSouvenirModel(souvenirModels.get(position));
                 Intent intent = new Intent(context, SouvenirActivity.class);
                 context.startActivity(intent);
             }

@@ -3,11 +3,9 @@ package com.example.gardeshgari;
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 import com.example.gardeshgari.Model.AttractionModel;
 import com.example.gardeshgari.Model.ProvinceModel;
@@ -18,11 +16,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class DBHelper extends SQLiteOpenHelper {
-    private Context context;
 
     public DBHelper(Context context, String name) {
         super(context, name, null, 1);
-        this.context = context;
     }
 
     @Override
@@ -134,7 +130,7 @@ public class DBHelper extends SQLiteOpenHelper {
         ArrayList<AttractionModel> arrayList = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        @SuppressLint("Recycle") Cursor res = db.rawQuery("select * from Attractions where province = \'" + province + "\';", null);
+        @SuppressLint("Recycle") Cursor res = db.rawQuery("SELECT * FROM Attractions WHERE province = \'" + province + "\';", null);
         res.moveToFirst();
 
         while (!res.isAfterLast()) {
@@ -158,7 +154,7 @@ public class DBHelper extends SQLiteOpenHelper {
         ArrayList<AttractionModel> arrayList = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        @SuppressLint("Recycle") Cursor res = db.rawQuery("select * from Attractions where type = \'" + type + "\' LIMIT 10;", null);
+        @SuppressLint("Recycle") Cursor res = db.rawQuery("SELECT * FROM Attractions WHERE type = \'" + type + "\' LIMIT 10;", null);
         res.moveToFirst();
 
         while (!res.isAfterLast()) {
@@ -182,7 +178,7 @@ public class DBHelper extends SQLiteOpenHelper {
         ArrayList<AttractionModel> arrayList = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        @SuppressLint("Recycle") Cursor res = db.rawQuery("select * from Attractions;", null);
+        @SuppressLint("Recycle") Cursor res = db.rawQuery("SELECT * FROM Attractions;", null);
         res.moveToFirst();
 
         while (!res.isAfterLast()) {
@@ -211,7 +207,7 @@ public class DBHelper extends SQLiteOpenHelper {
         ArrayList<SouvenirModel> arrayList = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        @SuppressLint("Recycle") Cursor res = db.rawQuery("select * from Souvenirs where province = \'" + province + "\';", null);
+        @SuppressLint("Recycle") Cursor res = db.rawQuery("SELECT * FROM Souvenirs WHERE province = \'" + province + "\';", null);
         res.moveToFirst();
 
         while (!res.isAfterLast()) {
@@ -232,7 +228,7 @@ public class DBHelper extends SQLiteOpenHelper {
         ArrayList<ProvinceModel> arrayList = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        @SuppressLint("Recycle") Cursor res = db.rawQuery("select * from Provinces;", null);
+        @SuppressLint("Recycle") Cursor res = db.rawQuery("SELECT * FROM Provinces;", null);
         res.moveToFirst();
 
         while (!res.isAfterLast()) {
@@ -251,7 +247,7 @@ public class DBHelper extends SQLiteOpenHelper {
         ArrayList<PictureModel> arrayList = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        @SuppressLint("Recycle") Cursor res = db.rawQuery("select * from Pictures where attractionId = \'" + attractionId + "\';", null);
+        @SuppressLint("Recycle") Cursor res = db.rawQuery("SELECT * FROM Pictures WHERE attractionId = \'" + attractionId + "\';", null);
         res.moveToFirst();
 
         while (!res.isAfterLast()) {
@@ -270,7 +266,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public Boolean isSavedAttraction(AttractionModel attractionModel) {
         SQLiteDatabase db = this.getReadableDatabase();
         @SuppressLint("Recycle") Cursor res = db.rawQuery(
-                "select * from SavedAttractions where id = \'" + attractionModel.getId() + "\'", null);
+                "SELECT * FROM SavedAttractions WHERE id = \'" + attractionModel.getId() + "\'", null);
         res.moveToFirst();
 
         return !res.isAfterLast();
@@ -279,7 +275,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public void deleteSavedAttraction(AttractionModel attractionModel) {
         SQLiteDatabase db = this.getReadableDatabase();
         @SuppressLint("Recycle") Cursor res = db.rawQuery(
-                "delete from SavedAttractions where id = \'" + attractionModel.getId() + "\'", null);
+                "delete from SavedAttractions WHERE id = \'" + attractionModel.getId() + "\'", null);
         res.moveToFirst();
     }
 
@@ -288,7 +284,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         SQLiteDatabase db = this.getReadableDatabase();
         @SuppressLint("Recycle") Cursor res = db.rawQuery(
-                "select * from SavedAttractions " +
+                "SELECT * FROM SavedAttractions " +
                         "inner join Attractions on SavedAttractions.id = Attractions.id", null);
         res.moveToFirst();
 
@@ -311,7 +307,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public Boolean isSavedSouvenir(SouvenirModel SouvenirModel) {
         SQLiteDatabase db = this.getReadableDatabase();
         @SuppressLint("Recycle") Cursor res = db.rawQuery(
-                "select * from SavedSouvenirs where name = \'" + SouvenirModel.getName() + "\'", null);
+                "SELECT * FROM SavedSouvenirs WHERE name = \'" + SouvenirModel.getName() + "\'", null);
         res.moveToFirst();
 
         return !res.isAfterLast();
@@ -320,7 +316,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public void deleteSavedSouvenir(SouvenirModel SouvenirModel) {
         SQLiteDatabase db = this.getReadableDatabase();
         @SuppressLint("Recycle") Cursor res = db.rawQuery(
-                "delete from SavedSouvenirs where name = \'" + SouvenirModel.getName() + "\'", null);
+                "delete from SavedSouvenirs WHERE name = \'" + SouvenirModel.getName() + "\'", null);
         res.moveToFirst();
     }
 
@@ -329,8 +325,8 @@ public class DBHelper extends SQLiteOpenHelper {
 
         SQLiteDatabase db = this.getReadableDatabase();
         @SuppressLint("Recycle") Cursor res = db.rawQuery(
-                "select * from SavedSouvenirs " +
-                        "inner join Souvenirs on SavedSouvenirs.name = Souvenirs.name", null);
+                "SELECT * FROM SavedSouvenirs " +
+                        "INNER JOIN Souvenirs ON SavedSouvenirs.name = Souvenirs.name", null);
         res.moveToFirst();
 
         while (!res.isAfterLast()) {
