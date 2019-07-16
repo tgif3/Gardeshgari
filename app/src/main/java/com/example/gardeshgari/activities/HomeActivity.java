@@ -49,9 +49,12 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tourism_attraction);
+        setContentView(R.layout.activity_home);
 
         context = this;
+
+        setTitle("Gardeshgari");
+
         createDatabase();
 
 
@@ -145,12 +148,20 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.province) {
-            Intent intent = new Intent(this, ProvinceActivity.class);
-            startActivity(intent);
-        } else if (item.getItemId() == R.id.save) {
-            Intent intent = new Intent(this, SaveActivity.class);
-            startActivity(intent);
+        Intent intent;
+        switch (item.getItemId()) {
+            case R.id.province:
+                intent = new Intent(this, ProvinceActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.save:
+                intent = new Intent(this, SaveActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.team:
+                new AlertDialog.Builder(this)
+                        .setMessage("علیرضا نائیجی\nمحمد حقیقت\nحسین بهبودی").show();
+                break;
         }
         return super.onContextItemSelected(item);
     }

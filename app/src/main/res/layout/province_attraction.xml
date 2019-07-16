@@ -22,7 +22,7 @@
     <ImageView
         android:id="@+id/image"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="300dp"
         android:scaleType="centerCrop"
         android:src="@drawable/attraction_icon"
         tools:ignore="ContentDescription" />
@@ -63,7 +63,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:textColor="#000"
-                android:textSize="28sp"
+                android:textSize="@dimen/titleSize"
                 android:padding="5dp"/>
         </LinearLayout>
 
@@ -72,7 +72,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="3dp"
-        android:gravity="right">
+        android:gravity="right|center"
+        tools:ignore="RtlHardcoded">
 
         <TextView
             android:id="@+id/address"
@@ -80,7 +81,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:textColor="#000"
-            android:textSize="18sp"
+            android:textSize="@dimen/subtitleSize"
             android:paddingRight="5dp"
             android:paddingLeft="5dp"
             />

@@ -3,15 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/team"
+        android:orderInCategory="100"
+        android:title="@string/team"
+        android:icon="@drawable/team_icon"
+        app:showAsAction="always" />
+    <item
         android:id="@+id/province"
         android:orderInCategory="100"
-        android:title="استان"
+        android:title="@string/province"
         android:icon="@drawable/province"
         app:showAsAction="always" />
     <item
         android:id="@+id/save"
         android:orderInCategory="100"
-        android:title="ذخیره"
+        android:title="@string/save"
         android:icon="@drawable/unsaved"
         app:showAsAction="always" />
 

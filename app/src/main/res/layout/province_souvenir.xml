@@ -63,7 +63,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:textColor="#000"
-                android:textSize="28sp"
+                android:textSize="@dimen/titleSize"
                 android:padding="5dp"/>
         </LinearLayout>
 

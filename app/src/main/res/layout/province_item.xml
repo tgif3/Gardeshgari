@@ -20,7 +20,7 @@
         android:layout_height="match_parent"
         android:gravity="center_vertical"
         android:textColor="#000"
-        android:textSize="24sp"
+        android:textSize="@dimen/titleSize"
         android:paddingRight="15dp"
         />
 
