@@ -1,4 +1,4 @@
-package com.example.gardeshgari.Model;
+package com.example.gardeshgari.model;
 
 public class SouvenirModel {
     private String name;

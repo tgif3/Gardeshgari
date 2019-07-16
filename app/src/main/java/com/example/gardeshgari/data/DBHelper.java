@@ -1,4 +1,4 @@
-package com.example.gardeshgari;
+package com.example.gardeshgari.data;
 
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
@@ -7,10 +7,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.example.gardeshgari.Model.AttractionModel;
-import com.example.gardeshgari.Model.ProvinceModel;
-import com.example.gardeshgari.Model.PictureModel;
-import com.example.gardeshgari.Model.SouvenirModel;
+import com.example.gardeshgari.model.AttractionModel;
+import com.example.gardeshgari.model.ProvinceModel;
+import com.example.gardeshgari.model.PictureModel;
+import com.example.gardeshgari.model.SouvenirModel;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -144,6 +144,51 @@ public class DBHelper extends SQLiteOpenHelper {
                     .withDescription(res.getString(res.getColumnIndex("description")))
                     .build();
             arrayList.add(attractionModel);
+            res.moveToNext();
+        }
+
+        return arrayList;
+    }
+
+    public ArrayList<AttractionModel> getAllAttractions() {
+        ArrayList<AttractionModel> arrayList = new ArrayList<>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        @SuppressLint("Recycle") Cursor res = db.rawQuery("SELECT * FROM Attractions;", null);
+        res.moveToFirst();
+
+        while (!res.isAfterLast()) {
+            AttractionModel attractionModel = new AttractionModel.Builder()
+                    .withId(res.getString(res.getColumnIndex("id")))
+                    .withTitle(res.getString(res.getColumnIndex("title")))
+                    .withImageUrl(res.getString(res.getColumnIndex("imageUrl")))
+                    .withAddress(res.getString(res.getColumnIndex("address")))
+                    .withProvince(res.getString(res.getColumnIndex("province")))
+                    .withType(res.getString(res.getColumnIndex("type")))
+                    .withDescription(res.getString(res.getColumnIndex("description")))
+                    .build();
+            arrayList.add(attractionModel);
+            res.moveToNext();
+        }
+
+        return arrayList;
+    }
+
+    public ArrayList<SouvenirModel> getAllSouvenirs() {
+        ArrayList<SouvenirModel> arrayList = new ArrayList<>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        @SuppressLint("Recycle") Cursor res = db.rawQuery("SELECT * FROM Souvenirs;", null);
+        res.moveToFirst();
+
+        while (!res.isAfterLast()) {
+            SouvenirModel souvenirModel = new SouvenirModel.Builder()
+                    .withName(res.getString(res.getColumnIndex("name")))
+                    .withImageUrl(res.getString(res.getColumnIndex("imageUrl")))
+                    .withProvince(res.getString(res.getColumnIndex("province")))
+                    .withDescription(res.getString(res.getColumnIndex("description")))
+                    .build();
+            arrayList.add(souvenirModel);
             res.moveToNext();
         }
 

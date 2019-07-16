@@ -54,18 +54,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:gravity="center|top">
+            android:gravity="center|center">
 
             <ImageView
                 android:layout_width="50dp"
-                android:layout_height="match_parent"
+                android:layout_height="50dp"
                 android:src="@drawable/share"
                 android:id="@+id/share"
                 android:padding="10dp"/>
 
             <ImageView
                 android:layout_width="50dp"
-                android:layout_height="match_parent"
+                android:layout_height="50dp"
                 android:src="@drawable/unsaved"
                 android:id="@+id/save"
                 android:padding="5dp"/>

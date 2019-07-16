@@ -1,4 +1,4 @@
-package com.example.gardeshgari;
+package com.example.gardeshgari.adapter;
 /*
  * The MIT License Copyright (c) 2011 Paul Soucy (paul@dev-smart.com)
  * The MIT License Copyright (c) 2013 MeetMe, Inc.
@@ -50,6 +50,8 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.Scroller;
+
+import com.example.gardeshgari.R;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

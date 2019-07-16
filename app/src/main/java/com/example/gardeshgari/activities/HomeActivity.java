@@ -5,11 +5,11 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -20,14 +20,14 @@ import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.gardeshgari.DBHelper;
-import com.example.gardeshgari.HorizontalListView;
-import com.example.gardeshgari.DataClass;
-import com.example.gardeshgari.Model.AttractionModel;
-import com.example.gardeshgari.Model.AttractionType;
 import com.example.gardeshgari.R;
 import com.example.gardeshgari.adapter.HorizontalAdapter;
+import com.example.gardeshgari.adapter.HorizontalListView;
 import com.example.gardeshgari.adapter.SliderAdapter;
+import com.example.gardeshgari.data.DBHelper;
+import com.example.gardeshgari.data.DataClass;
+import com.example.gardeshgari.model.AttractionModel;
+import com.example.gardeshgari.model.AttractionType;
 
 import java.util.ArrayList;
 import java.util.Timer;
@@ -39,7 +39,6 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 @SuppressLint("StaticFieldLeak")
 public class HomeActivity extends AppCompatActivity {
     private ViewPager mPager;
-    private int currentPage = 0;
     private ArrayList<AttractionModel> sliderAttractions = new ArrayList<>();
     private LayoutInflater layoutInflater = null;
     private ArrayList<HorizontalListView> horizontalListViews;
@@ -58,7 +57,7 @@ public class HomeActivity extends AppCompatActivity {
 
         context = this;
 
-        setTitle("Gardeshgari");
+        setTitle("گردشگری");
 
         createDatabase();
         
@@ -129,10 +128,11 @@ public class HomeActivity extends AppCompatActivity {
         final Handler handler = new Handler();
         final Runnable Update = new Runnable() {
             public void run() {
-                if (currentPage == sliderAttractions.size()) {
+                int currentPage = mPager.getCurrentItem() + 1;
+                if (currentPage >= sliderAttractions.size()) {
                     currentPage = 0;
                 }
-                mPager.setCurrentItem(currentPage++, true);
+                mPager.setCurrentItem(currentPage, true);
             }
         };
         Timer swipeTimer = new Timer();
@@ -165,6 +165,10 @@ public class HomeActivity extends AppCompatActivity {
             case R.id.team:
                 new AlertDialog.Builder(this)
                         .setMessage("علیرضا نائیجی\nمحمد حقیقت\nحسین بهبودی").show();
+                break;
+            case R.id.search:
+                intent = new Intent(this, SearchActivity.class);
+                startActivity(intent);
                 break;
         }
         return super.onContextItemSelected(item);

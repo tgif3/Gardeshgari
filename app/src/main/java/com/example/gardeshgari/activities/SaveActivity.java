@@ -8,9 +8,9 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
-import com.example.gardeshgari.DataClass;
-import com.example.gardeshgari.Model.AttractionModel;
-import com.example.gardeshgari.Model.SouvenirModel;
+import com.example.gardeshgari.data.DataClass;
+import com.example.gardeshgari.model.AttractionModel;
+import com.example.gardeshgari.model.SouvenirModel;
 import com.example.gardeshgari.R;
 import com.example.gardeshgari.adapter.AttractionAdapter;
 import com.example.gardeshgari.adapter.SouvenirAdapter;

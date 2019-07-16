@@ -11,8 +11,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.gardeshgari.DataClass;
-import com.example.gardeshgari.Model.PictureModel;
+import com.example.gardeshgari.data.DataClass;
+import com.example.gardeshgari.model.PictureModel;
 import com.example.gardeshgari.R;
 import com.example.gardeshgari.adapter.SliderAdapter;
 

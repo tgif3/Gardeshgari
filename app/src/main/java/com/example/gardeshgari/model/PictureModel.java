@@ -1,4 +1,4 @@
-package com.example.gardeshgari.Model;
+package com.example.gardeshgari.model;
 
 public class PictureModel {
     private String id;

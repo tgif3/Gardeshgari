@@ -1,10 +1,10 @@
-package com.example.gardeshgari;
+package com.example.gardeshgari.data;
 
-import com.example.gardeshgari.Model.AttractionModel;
-import com.example.gardeshgari.Model.AttractionType;
-import com.example.gardeshgari.Model.PictureModel;
-import com.example.gardeshgari.Model.ProvinceModel;
-import com.example.gardeshgari.Model.SouvenirModel;
+import com.example.gardeshgari.model.AttractionModel;
+import com.example.gardeshgari.model.AttractionType;
+import com.example.gardeshgari.model.PictureModel;
+import com.example.gardeshgari.model.ProvinceModel;
+import com.example.gardeshgari.model.SouvenirModel;
 
 public class DataClass {
     
@@ -879,7 +879,7 @@ public class DataClass {
 
         provinceModel = new ProvinceModel.Builder()
                 .withName("کرمانشاه")
-                .withImageUrl("https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Taghe_bprovince.jpg/225px-Taghe_bprovince.jpg")
+                .withImageUrl("https://upload.wikimedia.org/wikipedia/commons/c/ce/Taghe_bostan.jpg")
                 .build();
         dbHelper.insertProvince(provinceModel);
 
@@ -1085,7 +1085,10 @@ public class DataClass {
                 .withName("بژی برساق")
                 .withImageUrl("https://images.kojaro.com/2018/11/6a690e9e-35db-422b-890c-953620d8c9ad.jpg")
                 .withProvince("ایلام")
-                .withDescription("https://images.kojaro.com/2018/11/6a690e9e-35db-422b-890c-953620d8c9ad.jpg")
+                .withDescription("بژی برساق نام یکی از شیرینی های سنتی و خوش آب و رنگ ایلام است که در قدیم به مناسبت های گوناگون از جمله جشن عروسی و نوروز درست می شد.\n" +
+                        "امروزه بژی برساق یکی از مهم ترین سوغاتی های ایلام به شمار می آید که سفر به این استان بدون خرید این شیرینی کامل نمی شود.\n" +
+                        "تردیدی نیست که آرد، شکر و روغن اساس همۀ شیرینی ها است اما آنچه که بژی را از دیگر شیرینی ها متمایز می کند، استفاده از آرد مرغوب و به دست آمده از گندمزارهای زیبای ایلام و روغن حیوانی اصیل است.\n" +
+                        "شیر، رازیانه، زیره، زردچوبه و گاهی زعفران نیز از دیگر موادی هستند که بژی برساق را به ثمر می رسانند.")
                 .build();
         dbHelper.insertSouvenir(souvenirModel);
 
@@ -1165,7 +1168,7 @@ public class DataClass {
 
         souvenirModel = new SouvenirModel.Builder()
                 .withName("قارا (قره\u200Cقوروت)")
-                .withImageUrl("https://rouzegar.com/wp-content/uploads/2017/12/khavas-qara-qorot-rouzegar.com-1-400x217.jpg")
+                .withImageUrl("https://media.isna.ir/content/1452324023371_17410t.png/3")
                 .withProvince("چهارمحال و بختیاری")
                 .withDescription("فرآورده\u200Cای لبنی و ترش است که از دوغ یا ماست تهیه می\u200Cشود و معمولا سیاه یا قهوه\u200Cای است. استان چهارمحال و بختیاری به ویژه شهرکرد، از مراکز مهم و اصلی تولید قره\u200Cقوروت در کشور است. مردان عشایر در این استان، به شکل سنتی دامپروری می\u200Cکنند و زنان عشایر با روش\u200Cهای بومی، لبنیات محلی تولید می\u200Cکنند. در بین این محصولات لبنی، قره\u200Cقوروت، بیشترین فروش را دارد و همواره مورد استقبال مسافران قرار می\u200Cگیرد.\n" +
                         "نوع دیگری از قره\u200Cقوروت نیز در این استان تولید می\u200Cشود که برخلاف نوع رایج، شیرین است. این نوع قره\u200Cقوروت، که به قارابشکن شهرت دارد، از آب\u200Cپنیر تهیه می\u200Cشود و رنگ روشنی دارد.")
@@ -1233,7 +1236,7 @@ public class DataClass {
                 .withName("آب\u200Cنبات")
                 .withImageUrl("https://images.kojaro.com/2016/11/a5bb5fd5-9f76-4042-bca1-4869113554c2.jpg")
                 .withProvince("خراسان شمالی")
-                .withDescription("https://images.kojaro.com/2016/11/a5bb5fd5-9f76-4042-bca1-4869113554c2.jpg")
+                .withDescription("معروف\u200Cترین سوغات خراسان شمالی به ویژه بجنورد، انواع آب\u200Cنبات است که قدمت تولید آنها به روش سنتی در کارگاه\u200Cهای محلی استان به بیش از یک قرن می\u200Cرسد و مصرفشان به جای قند کنار چای بین اهالی بسیار رواج دارد. قدیمی\u200Cترین نوع آب\u200Cنبات تولیدشده در این استان، آب\u200Cنبات قیچی است که به دلیل برش با قیچی\u200Cهای بزرگ سنتی، به این نام مشهور است. مشهورترین آب\u200Cنبات استان، شکرپنیر است. ماده\u200Cی اصلی تشکیل\u200Cدهنده\u200Cی آب\u200Cنبات، ماده\u200Cای سفیدرنگ شبیه به خمیر است که از جوشاندن شکر با آب، تهیه می\u200Cشود. آب و شکر را می\u200Cجوشانند تا به غلظت مورد نظر برسد سپس این ماده\u200Cی قرمزرنگ را با کشیدن و ورز دادن به خمیری سفیدرنگ تبدیل می\u200Cکنند. البته در برخی از انواع آب\u200Cنبات مانند شکرپنیر از مقدار کمی آرد برنج یا گندم و در بعضی دیگر از سفیده\u200Cی تخم\u200Cمرغ نیز در تهیه\u200Cی خمیر استفاده می\u200Cشود. مشهورترین طعم\u200Cهای آب\u200Cنبات خراسان شمالی که از قدیم رواج داشته\u200Cاند، هل\u200Cدار، دارچینی و زنجبیلی هستند اما امروزه آب\u200Cنبات\u200Cهای این استان در طعم\u200Cهای دیگر مانند نارگیلی، پسته\u200Cای و کاکائویی نیز تولید می\u200Cشوند.\n")
                 .build();
         dbHelper.insertSouvenir(souvenirModel);
 

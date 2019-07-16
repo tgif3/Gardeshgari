@@ -9,8 +9,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.example.gardeshgari.DataClass;
-import com.example.gardeshgari.Model.ProvinceModel;
+import com.example.gardeshgari.data.DataClass;
+import com.example.gardeshgari.model.ProvinceModel;
 import com.example.gardeshgari.R;
 import com.example.gardeshgari.adapter.ProvinceAdapter;
 
