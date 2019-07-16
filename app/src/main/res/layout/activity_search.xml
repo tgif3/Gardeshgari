@@ -15,7 +15,9 @@
         android:layout_height="wrap_content"
         android:id="@+id/editText"
         android:layout_gravity="right"
-        android:gravity="right"/>
+        android:gravity="right"
+        android:padding="10dp"
+        android:hint="@string/search_hint"/>
 
     <ListView
         android:id="@+id/listView"

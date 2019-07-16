@@ -8,4 +8,5 @@
     <string name="province">استان</string>
     <string name="team">تیم</string>
     <string name="search">جست‌وجو</string>
+    <string name="search_hint">عبارت مورد نظر را جست‌وجو کنید.</string>
 </resources>
