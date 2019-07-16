@@ -6,25 +6,25 @@ import com.example.gardeshgari.Model.PictureModel;
 import com.example.gardeshgari.Model.ProvinceModel;
 import com.example.gardeshgari.Model.SouvenirModel;
 
-public class InitialClass {
+public class initializeClass {
     
     private DBHelper dbHelper;
     
-    public InitialClass(DBHelper dbHelper) {
+    public initializeClass(DBHelper dbHelper) {
         this.dbHelper = dbHelper;
-        readNaturalAttractions();
-        readCoastAttractions();
-        readPictures();
-        readProvinces();
-        readSouvenirs();
-        readHealthAttraction();
-        readHistoricalAttraction();
-        readMuseumAttraction();
-        readShoppingAttraction();
-        readAmusementPark();
+        insertNaturalAttractions();
+        insertCoastAttractions();
+        insertPictures();
+        insertProvinces();
+        insertSouvenirs();
+        insertHealthAttraction();
+        insertHistoricalAttraction();
+        insertMuseumAttraction();
+        insertShoppingAttraction();
+        insertAmusementPark();
     }
 
-    public void readNaturalAttractions() {
+    private void insertNaturalAttractions() {
         AttractionModel attractionModel;
 
         attractionModel = new AttractionModel.Builder()
@@ -141,7 +141,7 @@ public class InitialClass {
         dbHelper.insertAttraction(attractionModel);
     }
 
-    public void readCoastAttractions() {
+    private void insertCoastAttractions() {
         AttractionModel attractionModel;
         attractionModel = new AttractionModel.Builder()
                 .withId("11")
@@ -254,7 +254,7 @@ public class InitialClass {
         dbHelper.insertAttraction(attractionModel);
     }
 
-    public void readHealthAttraction() {
+    private void insertHealthAttraction() {
         AttractionModel attractionModel;
         attractionModel = new AttractionModel.Builder()
                 .withId("21")
@@ -323,7 +323,7 @@ public class InitialClass {
         dbHelper.insertAttraction(attractionModel);
     }
 
-    public void readHistoricalAttraction() {
+    private void insertHistoricalAttraction() {
         AttractionModel attractionModel;
         attractionModel = new AttractionModel.Builder()
                 .withId("27")
@@ -460,7 +460,7 @@ public class InitialClass {
         dbHelper.insertAttraction(attractionModel);
     }
 
-    public void readMuseumAttraction() {
+    private void insertMuseumAttraction() {
         AttractionModel attractionModel;
         attractionModel = new AttractionModel.Builder()
                 .withId("38")
@@ -566,7 +566,7 @@ public class InitialClass {
         dbHelper.insertAttraction(attractionModel);
     }
 
-    public void readShoppingAttraction() {
+    private void insertShoppingAttraction() {
 
         AttractionModel attractionModel;
         attractionModel = new AttractionModel.Builder()
@@ -669,7 +669,7 @@ public class InitialClass {
         dbHelper.insertAttraction(attractionModel);
     }
 
-    public void readAmusementPark() {
+    private void insertAmusementPark() {
         AttractionModel attractionModel;
         attractionModel = new AttractionModel.Builder()
                 .withId("56")
@@ -727,7 +727,7 @@ public class InitialClass {
         dbHelper.insertAttraction(attractionModel);
     }
 
-    public void readProvinces() {
+    private void insertProvinces() {
         ProvinceModel provinceModel = new ProvinceModel.Builder()
                 .withName("آذربایجان شرقی")
                 .withImageUrl("https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Tabriz_City_Hall.jpg/225px-Tabriz_City_Hall.jpg")
@@ -909,7 +909,7 @@ public class InitialClass {
         dbHelper.insertProvince(provinceModel);
     }
 
-    public void readSouvenirs() {
+    private void insertSouvenirs() {
 
         SouvenirModel souvenirModel;
         souvenirModel = new SouvenirModel.Builder()
@@ -1709,7 +1709,7 @@ public class InitialClass {
         dbHelper.insertSouvenir(souvenirModel);
     }
 
-    public void readPictures() {
+    private void insertPictures() {
         PictureModel pictureModel = new PictureModel.Builder()
                 .withId("1")
                 .withImageUrl("https://cdnw.elicdn.com/Blog/wp-content/uploads/2019/02/%D8%B1%D9%88%D8%B3%D8%AA%D8%A7%DB%8C-%D8%B2%D8%B1%DB%8C%D9%86-%D8%AF%D8%B4%D8%AA.jpg")

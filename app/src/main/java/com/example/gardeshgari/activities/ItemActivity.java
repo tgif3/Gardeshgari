@@ -1,17 +1,11 @@
 package com.example.gardeshgari.activities;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.KeyEvent;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 
 import com.example.gardeshgari.Model.AttractionModel;
 import com.example.gardeshgari.Model.ProvinceModel;
@@ -28,9 +22,7 @@ import java.util.ArrayList;
 public class ItemActivity extends AppCompatActivity {
     private SouvenirAdapter souvenirAdapter;
     private AttractionProvinceAdapter attractionProvinceAdapter;
-    private TabLayout tabLayout;
     public ViewPager viewPager;
-    private Toolbar toolbar;
     private static ProvinceModel provinceModel;
 
     @SuppressLint("CutPasteId")
@@ -48,18 +40,15 @@ public class ItemActivity extends AppCompatActivity {
     }
 
     private void initializeUI() {
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
         viewPager = findViewById(R.id.viewpager);
 
-        tabLayout = findViewById(R.id.tabs);
+        TabLayout tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
 
-        setupViewPager(viewPager);
+        setupViewPager();
     }
 
-    private void setupViewPager(ViewPager viewPager) {
+    private void setupViewPager() {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new SouvenirFragment(souvenirAdapter), "سوغات");
         adapter.addFragment(new AttractionFragment(attractionProvinceAdapter), "جاذبه‌های گردشگری");
@@ -68,5 +57,11 @@ public class ItemActivity extends AppCompatActivity {
 
     public static void setProvinceModel(ProvinceModel provinceModel) {
         ItemActivity.provinceModel = provinceModel;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        viewPager.setAdapter(null);
     }
 }

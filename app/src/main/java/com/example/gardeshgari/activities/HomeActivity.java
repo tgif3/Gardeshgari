@@ -22,7 +22,7 @@ import android.widget.TextView;
 
 import com.example.gardeshgari.DBHelper;
 import com.example.gardeshgari.HorizontalListView;
-import com.example.gardeshgari.InitialClass;
+import com.example.gardeshgari.initializeClass;
 import com.example.gardeshgari.Model.AttractionModel;
 import com.example.gardeshgari.Model.AttractionType;
 import com.example.gardeshgari.R;
@@ -90,7 +90,6 @@ public class HomeActivity extends AppCompatActivity {
                 AttractionModel attractionModel = (AttractionModel)
                         parent.getAdapter().getItem(position);
                 AttractionActivity.setAttractionModel(attractionModel);
-                AttractionActivity.setCallByHome(true);
                 Intent intent = new Intent(context, AttractionActivity.class);
                 startActivity(intent);
             }
@@ -189,7 +188,7 @@ public class HomeActivity extends AppCompatActivity {
         dbHelper = new DBHelper(this, "database");
         SharedPreferences sharedPreferences = this.getPreferences(Context.MODE_PRIVATE);
         if (!sharedPreferences.contains("database")) {
-            new InitialClass(dbHelper);
+            new initializeClass(dbHelper);
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putBoolean("database", true);
             editor.apply();

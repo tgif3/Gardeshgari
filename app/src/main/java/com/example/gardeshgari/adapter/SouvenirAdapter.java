@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.example.gardeshgari.Model.SouvenirModel;
 import com.example.gardeshgari.R;
 import com.example.gardeshgari.activities.HomeActivity;
+import com.example.gardeshgari.activities.SouvenirActivity;
 import com.example.gardeshgari.imageUtils.ImageLoader;
 
 import java.util.ArrayList;
@@ -29,10 +30,6 @@ public class SouvenirAdapter extends BaseAdapter {
         this.souvenirModels = souvenirModels;
         inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         imageLoader = new ImageLoader(context.getApplicationContext());
-    }
-
-    public void setSouvenirModels(ArrayList<SouvenirModel> souvenirModels) {
-        this.souvenirModels = souvenirModels;
     }
 
     @Override
@@ -66,7 +63,6 @@ public class SouvenirAdapter extends BaseAdapter {
             view = inflater.inflate(R.layout.province_souvenir, null);
 
         TextView name = view.findViewById(R.id.name);
-        TextView description = view.findViewById(R.id.description);
         ImageView image = view.findViewById(R.id.image);
 
         final ImageView saveImageView = view.findViewById(R.id.save);
@@ -105,8 +101,16 @@ public class SouvenirAdapter extends BaseAdapter {
         });
 
         name.setText(souvenirModels.get(position).getName());
-        description.setText(souvenirModels.get(position).getDescription());
         imageLoader.DisplayImage(souvenirModels.get(position).getImageUrl(), image);
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SouvenirActivity.setSouvenirModel(souvenirModels.get(position));
+                Intent intent = new Intent(context, SouvenirActivity.class);
+                context.startActivity(intent);
+            }
+        });
 
         return view;
     }

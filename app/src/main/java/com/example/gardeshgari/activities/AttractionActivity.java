@@ -1,7 +1,6 @@
 package com.example.gardeshgari.activities;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
@@ -21,23 +20,16 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import me.relex.circleindicator.CircleIndicator;
+@SuppressLint("StaticFieldLeak")
 
 public class AttractionActivity extends AppCompatActivity {
-
     private ArrayList<String> urls;
     private static ViewPager mPager;
     private static int currentPage = 0;
     private static AttractionModel attractionModel;
-    private static boolean callByHome;
-    private android.support.v7.widget.Toolbar toolbar;
-    private Context context;
 
     public static void setAttractionModel(AttractionModel attractionModel) {
         AttractionActivity.attractionModel = attractionModel;
-    }
-
-    public static void setCallByHome(boolean callByHome) {
-        AttractionActivity.callByHome = callByHome;
     }
 
     @SuppressLint("CutPasteId")
@@ -46,11 +38,10 @@ public class AttractionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_attraction);
 
-        context = this;
+        initializeUi();
+    }
 
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
+    private void initializeUi() {
         TextView name = findViewById(R.id.name);
         TextView address = findViewById(R.id.address);
         TextView description = findViewById(R.id.description);
@@ -58,10 +49,10 @@ public class AttractionActivity extends AppCompatActivity {
         name.setText(attractionModel.getTitle());
         address.setText(attractionModel.getAddress());
         description.setText(attractionModel.getDescription());
-        init(attractionModel.getId());
+        createSlider(attractionModel.getId());
 
         ImageView shareImageView = findViewById(R.id.share);
-        shareImageView.setOnClickListener(new View.OnClickListener () {
+        shareImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent myIntent = new Intent(Intent.ACTION_SEND);
@@ -70,8 +61,8 @@ public class AttractionActivity extends AppCompatActivity {
                         attractionModel.getAddress() + "\n" +
                         attractionModel.getDescription();
                 String sub = attractionModel.getTitle();
-                myIntent.putExtra(Intent.EXTRA_SUBJECT,sub);
-                myIntent.putExtra(Intent.EXTRA_TEXT,body);
+                myIntent.putExtra(Intent.EXTRA_SUBJECT, sub);
+                myIntent.putExtra(Intent.EXTRA_TEXT, body);
                 startActivity(Intent.createChooser(myIntent, "Share Using"));
             }
         });
@@ -82,7 +73,7 @@ public class AttractionActivity extends AppCompatActivity {
         } else {
             saveImageView.setImageResource(R.drawable.unsaved);
         }
-        saveImageView.setOnClickListener(new View.OnClickListener () {
+        saveImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (HomeActivity.getDbHelper().isSavedAttraction(attractionModel)) {
@@ -94,10 +85,9 @@ public class AttractionActivity extends AppCompatActivity {
                 }
             }
         });
-
     }
 
-    private void init(String attractionId) {
+    private void createSlider(String attractionId) {
         ArrayList<PictureModel> pictureModels = HomeActivity.getDbHelper().getAllPicturesByAttractionId(attractionId);
         urls = new ArrayList<>();
         for (PictureModel pictureModel : pictureModels) {
@@ -127,28 +117,4 @@ public class AttractionActivity extends AppCompatActivity {
             }
         }, 0, 3000);
     }
-
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        if (callByHome) {
-//            getMenuInflater().inflate(R.menu.home_menu, menu);
-//        } else {
-//            getMenuInflater().inflate(R.menu.province_menu, menu);
-//        }
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        int id = item.getItemId();
-//        if (id == R.id.province) {
-//            Intent intent = new Intent(this, ProvinceActivity.class);
-//            startActivity(intent);
-//            return true;
-//        } else if (id == R.id.home) {
-//            Intent intent = new Intent(this, HomeActivity.class);
-//            startActivity(intent);
-//        }
-//        return false;
-//    }
 }
