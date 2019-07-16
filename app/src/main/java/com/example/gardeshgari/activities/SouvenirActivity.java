@@ -13,9 +13,16 @@ import com.example.gardeshgari.DataClass;
 import com.example.gardeshgari.R;
 import com.example.gardeshgari.imageUtils.ImageLoader;
 
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+
 @SuppressLint("StaticFieldLeak")
 
 public class SouvenirActivity extends AppCompatActivity {
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
 
     private Context context;
 

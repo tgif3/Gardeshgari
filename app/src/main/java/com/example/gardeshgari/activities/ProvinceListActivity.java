@@ -16,10 +16,17 @@ import com.example.gardeshgari.adapter.ProvinceAdapter;
 
 import java.util.ArrayList;
 
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+
 public class ProvinceListActivity extends AppCompatActivity {
     private ListView listView;
     private Context context;
     private ArrayList<ProvinceModel> provinceModels;
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -1,6 +1,7 @@
 package com.example.gardeshgari.activities;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -19,9 +20,16 @@ import com.example.gardeshgari.fragments.SouvenirFragment;
 
 import java.util.ArrayList;
 
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+
 public class SaveActivity extends AppCompatActivity {
     private SouvenirAdapter souvenirAdapter;
     private AttractionAdapter attractionAdapter;
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
 
     @SuppressLint("CutPasteId")
     @Override

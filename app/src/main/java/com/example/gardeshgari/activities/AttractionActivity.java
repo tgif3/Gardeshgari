@@ -1,6 +1,7 @@
 package com.example.gardeshgari.activities;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
@@ -20,12 +21,19 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import me.relex.circleindicator.CircleIndicator;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+
 @SuppressLint("StaticFieldLeak")
 
 public class AttractionActivity extends AppCompatActivity {
     private ArrayList<String> urls;
     private ViewPager mPager;
     private int currentPage = 0;
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
 
     @SuppressLint("CutPasteId")
     @Override

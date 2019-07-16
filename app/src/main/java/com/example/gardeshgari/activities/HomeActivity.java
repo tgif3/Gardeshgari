@@ -34,6 +34,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import me.relex.circleindicator.CircleIndicator;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 @SuppressLint("StaticFieldLeak")
 public class HomeActivity extends AppCompatActivity {
@@ -44,6 +45,11 @@ public class HomeActivity extends AppCompatActivity {
     private ArrayList<HorizontalListView> horizontalListViews;
 
     private Context context;
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
