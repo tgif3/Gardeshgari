@@ -25,6 +25,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 public class SaveActivity extends AppCompatActivity {
     private SouvenirAdapter souvenirAdapter;
     private AttractionAdapter attractionAdapter;
+    private ViewPager viewPager;
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -49,15 +50,15 @@ public class SaveActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        ViewPager viewPager = findViewById(R.id.viewpager);
+        this.viewPager = findViewById(R.id.viewpager);
 
         TabLayout tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
 
-        setupViewPager(viewPager);
+        setupViewPager();
     }
 
-    private void setupViewPager(ViewPager viewPager) {
+    private void setupViewPager() {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new SouvenirFragment(souvenirAdapter), "سوغات");
         adapter.addFragment(new AttractionFragment(attractionAdapter), "جاذبه‌ها");
@@ -69,5 +70,11 @@ public class SaveActivity extends AppCompatActivity {
         super.onRestart();
         finish();
         startActivity(getIntent());
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        viewPager.setAdapter(null);
     }
 }

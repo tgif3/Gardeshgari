@@ -116,6 +116,7 @@ public class HomeActivity extends AppCompatActivity {
         for (HorizontalListView horizontalListView : horizontalListViews) {
             horizontalListView.setAdapter(null);
         }
+        mPager.setAdapter(null);
         super.onDestroy();
     }
 

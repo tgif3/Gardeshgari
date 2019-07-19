@@ -717,17 +717,6 @@ public class DataClass {
         dbHelper.insertAttraction(attractionModel);
 
         attractionModel = new AttractionModel.Builder()
-                .withId("58")
-                .withTitle("شهر رویاهای اصفهان")
-                .withImageUrl("http://cdn-tehran.wisgoon.com/dlir-s3/10531428392684278536.JPG")
-                .withAddress("بزرگراه کمربندی شرق اصفهان")
-                .withProvince("اصفهان")
-                .withType(AttractionType.amusementPark.toString())
-                .withDescription("سفر به استان زیبای اصفهان همیشه خاطره انگیز و جذاب بوده است. با افتتاح و راه اندازی یكی از بزرگترین و مجهز ترین شهربازی های كشور در این شهر تاریخی، سفر به این دیار كهن و پر جاذبه برای مسافران خاطره انگیز تر از قبل شده است. این شهربازی مدرن كه از مجهزترین شهربازی های خاورمیانه می باشد، در فضایی به وسعت 170000 متر مربع احداث شده است. همكاری متخصصان داخلی با یكی از بزرگترین شركت های چینی در ساخت این مجموعه توانسته است انتظار مردم این شهر و گردشگران را به خوبی پاسخ دهد. این شهربازی در شرق شهر اصفهان واقع شده است. \"ترن هوایی\" و \"ترن معلق\" از وسائل بازی منحصر به فرد این مجموعه می باشد كه توانسته ترس و اضطراب را در كنار هیجان و شور به هم پیوند بزند. معماری متفاوت و ساختمان ها و مجسمه های مختلف این شهربازی از دیگر نقاط مورد توجه مسافران و بازدید كنندگان این مجموعه می باشد.\n")
-                .build();
-        dbHelper.insertAttraction(attractionModel);
-
-        attractionModel = new AttractionModel.Builder()
                 .withId("59")
                 .withTitle("قصر بازی رشت")
                 .withImageUrl("https://seeiran.ir/wp-content/uploads/2017/12/%D9%BE%D8%A7%D8%B1%DA%A9-%D9%82%D8%B5%D8%B1%D8%A8%D8%A7%D8%B2%DB%8C-%D8%B1%D8%B4%D8%AA-3.jpg")

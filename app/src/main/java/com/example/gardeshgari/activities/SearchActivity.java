@@ -24,6 +24,7 @@ public class SearchActivity extends AppCompatActivity {
     private ArrayAdapter<String> listAdapter;
     private ArrayList<AttractionModel> attractionModels;
     private ArrayList<SouvenirModel> souvenirModels;
+    private ListView itemList;
     private Context context;
 
     @Override
@@ -34,7 +35,7 @@ public class SearchActivity extends AppCompatActivity {
         this.context = this;
 
         EditText filterText = findViewById(R.id.editText);
-        ListView itemList = findViewById(R.id.listView);
+        itemList = findViewById(R.id.listView);
 
         attractionModels = DataClass.getInstance().getDbHelper().getAllAttractions();
         souvenirModels = DataClass.getInstance().getDbHelper().getAllSouvenirs();
@@ -92,5 +93,11 @@ public class SearchActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        itemList.setAdapter(null);
     }
 }

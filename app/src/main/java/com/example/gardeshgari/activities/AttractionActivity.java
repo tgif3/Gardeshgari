@@ -120,4 +120,10 @@ public class AttractionActivity extends AppCompatActivity {
             }
         }, 0, 3000);
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mPager.setAdapter(null);
+    }
 }
