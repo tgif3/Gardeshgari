@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:dist="http://schemas.android.com/apk/distribution"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.gardeshgari">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -15,8 +16,9 @@
         android:label="گردشگری"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".activities.SearchActivity"></activity>
+        android:theme="@style/AppTheme"
+        tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+        <activity android:name=".activities.SearchActivity" />
         <activity android:name=".activities.SouvenirActivity" />
         <activity android:name=".activities.SaveActivity" />
         <activity android:name=".activities.AttractionActivity" />
