@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
@@ -7,7 +8,8 @@
         android:orderInCategory="100"
         android:title="@string/team"
         android:icon="@drawable/team_icon"
-        app:showAsAction="always" />
+        app:showAsAction="always"
+        tools:ignore="AlwaysShowAction" />
     <item
         android:id="@+id/search"
         android:orderInCategory="100"
@@ -18,13 +20,13 @@
         android:id="@+id/province"
         android:orderInCategory="100"
         android:title="@string/province"
-        android:icon="@drawable/province"
+        android:icon="@drawable/province_icon"
         app:showAsAction="always" />
     <item
         android:id="@+id/save"
         android:orderInCategory="100"
         android:title="@string/save"
-        android:icon="@drawable/unsaved"
+        android:icon="@drawable/unsaved_icon"
         app:showAsAction="always" />
 
 </menu>

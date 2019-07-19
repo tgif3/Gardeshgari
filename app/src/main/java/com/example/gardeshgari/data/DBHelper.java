@@ -72,7 +72,7 @@ public class DBHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void insertAttraction(AttractionModel attractionModel) {
+    void insertAttraction(AttractionModel attractionModel) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("id", attractionModel.getId());
@@ -85,7 +85,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.insert("Attractions", null, contentValues);
     }
 
-    public void insertProvince(ProvinceModel provinceModel) {
+    void insertProvince(ProvinceModel provinceModel) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("name", provinceModel.getName());
@@ -93,7 +93,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.insert("Provinces", null, contentValues);
     }
 
-    public void insertSouvenir(SouvenirModel souvenirModel) {
+    void insertSouvenir(SouvenirModel souvenirModel) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("name", souvenirModel.getName());
@@ -103,7 +103,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.insert("Souvenirs", null, contentValues);
     }
 
-    public void insertPicture(PictureModel pictureModel) {
+    void insertPicture(PictureModel pictureModel) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("id", pictureModel.getId());

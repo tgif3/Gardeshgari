@@ -11,7 +11,7 @@
     <application
         android:name=".base.application.BaseApplication"
         android:allowBackup="true"
-        android:icon="@drawable/iran"
+        android:icon="@drawable/iran_icon"
         android:label="گردشگری"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"

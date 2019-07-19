@@ -59,8 +59,8 @@ public class SaveActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new SouvenirFragment(souvenirAdapter), "سوغات ذخیره‌شده");
-        adapter.addFragment(new AttractionFragment(attractionAdapter), "جاذبه‌های گردشگری ذخیره‌شده");
+        adapter.addFragment(new SouvenirFragment(souvenirAdapter), "سوغات");
+        adapter.addFragment(new AttractionFragment(attractionAdapter), "جاذبه‌ها");
         viewPager.setAdapter(adapter);
     }
 

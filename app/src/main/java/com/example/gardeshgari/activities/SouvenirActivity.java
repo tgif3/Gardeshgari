@@ -50,19 +50,19 @@ public class SouvenirActivity extends AppCompatActivity {
 
         final ImageView saveImageView = findViewById(R.id.save);
         if (DataClass.getInstance().getDbHelper().isSavedSouvenir(DataClass.getInstance().getSouvenirModel())) {
-            saveImageView.setImageResource(R.drawable.saved);
+            saveImageView.setImageResource(R.drawable.saved_icon);
         } else {
-            saveImageView.setImageResource(R.drawable.unsaved);
+            saveImageView.setImageResource(R.drawable.unsaved_icon);
         }
         saveImageView.setOnClickListener(new View.OnClickListener () {
             @Override
             public void onClick(View v) {
                 if (DataClass.getInstance().getDbHelper().isSavedSouvenir(DataClass.getInstance().getSouvenirModel())) {
                     DataClass.getInstance().getDbHelper().deleteSavedSouvenir(DataClass.getInstance().getSouvenirModel());
-                    saveImageView.setImageResource(R.drawable.unsaved);
+                    saveImageView.setImageResource(R.drawable.unsaved_icon);
                 } else {
                     DataClass.getInstance().getDbHelper().insertSavedSouvenir(DataClass.getInstance().getSouvenirModel());
-                    saveImageView.setImageResource(R.drawable.saved);
+                    saveImageView.setImageResource(R.drawable.saved_icon);
                 }
             }
         });

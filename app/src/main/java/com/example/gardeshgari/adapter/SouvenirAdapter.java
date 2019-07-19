@@ -69,19 +69,19 @@ public class SouvenirAdapter extends BaseAdapter {
 
         final ImageView saveImageView = view.findViewById(R.id.save);
         if (DataClass.getInstance().getDbHelper().isSavedSouvenir(souvenirModels.get(position))) {
-            saveImageView.setImageResource(R.drawable.saved);
+            saveImageView.setImageResource(R.drawable.saved_icon);
         } else {
-            saveImageView.setImageResource(R.drawable.unsaved);
+            saveImageView.setImageResource(R.drawable.unsaved_icon);
         }
         saveImageView.setOnClickListener(new View.OnClickListener () {
             @Override
             public void onClick(View v) {
                 if (DataClass.getInstance().getDbHelper().isSavedSouvenir(souvenirModels.get(position))) {
                     DataClass.getInstance().getDbHelper().deleteSavedSouvenir(souvenirModels.get(position));
-                    saveImageView.setImageResource(R.drawable.unsaved);
+                    saveImageView.setImageResource(R.drawable.unsaved_icon);
                 } else {
                     DataClass.getInstance().getDbHelper().insertSavedSouvenir(souvenirModels.get(position));
-                    saveImageView.setImageResource(R.drawable.saved);
+                    saveImageView.setImageResource(R.drawable.saved_icon);
                 }
             }
         });

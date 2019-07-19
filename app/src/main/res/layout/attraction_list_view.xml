@@ -26,19 +26,18 @@
             android:textColor="#000"
             android:textSize="@dimen/titleSize"
             android:paddingRight="5dp"
-            android:paddingLeft="5dp"
-            android:text="جنگل‌های سرسبز شمال"/>
+            android:paddingLeft="5dp"/>
 
         <ImageView
             android:id="@+id/image"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/attraction_icon" />
+            android:src="@drawable/attraction_icon"
+            tools:ignore="ContentDescription" />
 
     </LinearLayout>
 
     <com.example.gardeshgari.adapter.HorizontalListView
-        xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:widget="http://schemas.android.com/apk/res-auto"
         android:id="@+id/HorizontalListView"
         android:layout_width="match_parent"

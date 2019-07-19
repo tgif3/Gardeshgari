@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/linearLayout"
     android:layout_width="match_parent"
@@ -17,7 +16,8 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="@drawable/border"
-        android:padding="5dp">
+        android:padding="5dp"
+        tools:ignore="UselessParent">
         
     <ImageView
         android:id="@+id/image"
@@ -46,16 +46,18 @@
             <ImageView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@drawable/share"
+                android:src="@drawable/share_icon"
                 android:id="@+id/share"
-                android:padding="10dp"/>
+                android:padding="10dp"
+                tools:ignore="ContentDescription" />
 
             <ImageView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@drawable/unsaved"
+                android:src="@drawable/unsaved_icon"
                 android:id="@+id/save"
-                android:padding="5dp"/>
+                android:padding="5dp"
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:id="@+id/name"
@@ -73,7 +75,7 @@
         android:orientation="horizontal"
         android:padding="3dp"
         android:gravity="right|center"
-        tools:ignore="RtlHardcoded">
+        tools:ignore="RtlHardcoded,UseCompoundDrawables">
 
         <TextView
             android:id="@+id/address"
@@ -90,7 +92,7 @@
             android:id="@+id/locationIcon"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@drawable/address"
+            android:src="@drawable/address_icon"
             tools:ignore="ContentDescription" />
 
     </LinearLayout>

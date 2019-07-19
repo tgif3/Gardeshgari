@@ -410,7 +410,7 @@ public class DataClass {
         attractionModel = new AttractionModel.Builder()
                 .withId("32")
                 .withTitle("پرسپولیس")
-                .withImageUrl("https://cdnw.elicdn.com/Blog/wp-content/uploads/2018/09/perspolis-iran.jpg")
+                .withImageUrl("https://cdnw.elicdn.com/Blog/wp-content/uploads/2018/09/perspolis-iran_icon.jpgn.jpg")
                 .withAddress("۶۰ کیلومتری شمال شرق شیراز")
                 .withProvince("فارس")
                 .withType(AttractionType.historical.toString())

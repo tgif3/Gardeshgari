@@ -28,7 +28,6 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 public class AttractionActivity extends AppCompatActivity {
     private ArrayList<String> urls;
     private ViewPager mPager;
-    private int currentPage = 0;
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -72,19 +71,19 @@ public class AttractionActivity extends AppCompatActivity {
 
         final ImageView saveImageView = findViewById(R.id.save);
         if (DataClass.getInstance().getDbHelper().isSavedAttraction(DataClass.getInstance().getAttractionModel())) {
-            saveImageView.setImageResource(R.drawable.saved);
+            saveImageView.setImageResource(R.drawable.saved_icon);
         } else {
-            saveImageView.setImageResource(R.drawable.unsaved);
+            saveImageView.setImageResource(R.drawable.unsaved_icon);
         }
         saveImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (DataClass.getInstance().getDbHelper().isSavedAttraction(DataClass.getInstance().getAttractionModel())) {
                     DataClass.getInstance().getDbHelper().deleteSavedAttraction(DataClass.getInstance().getAttractionModel());
-                    saveImageView.setImageResource(R.drawable.unsaved);
+                    saveImageView.setImageResource(R.drawable.unsaved_icon);
                 } else {
                     DataClass.getInstance().getDbHelper().insertSavedAttraction(DataClass.getInstance().getAttractionModel());
-                    saveImageView.setImageResource(R.drawable.saved);
+                    saveImageView.setImageResource(R.drawable.saved_icon);
                 }
             }
         });
@@ -106,10 +105,11 @@ public class AttractionActivity extends AppCompatActivity {
         final Handler handler = new Handler();
         final Runnable Update = new Runnable() {
             public void run() {
-                if (currentPage == urls.size()) {
+                int currentPage = mPager.getCurrentItem() + 1;
+                if (currentPage >= urls.size()) {
                     currentPage = 0;
                 }
-                mPager.setCurrentItem(currentPage++, true);
+                mPager.setCurrentItem(currentPage, true);
             }
         };
         Timer swipeTimer = new Timer();

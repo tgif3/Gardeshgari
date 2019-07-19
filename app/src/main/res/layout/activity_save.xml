@@ -8,17 +8,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <!--<LinearLayout-->
-        <!--android:id="@+id/container_toolbar"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:orientation="vertical">-->
-
-        <!--<include-->
-        <!--android:id="@+id/toolbar"-->
-        <!--layout="@layout/toolbar" />-->
-        <!--</LinearLayout>-->
-
         <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -31,7 +20,8 @@
                 app:tabGravity="fill"
                 app:tabMode="fixed"
                 app:tabSelectedTextColor="#000"
-                app:tabTextColor="#fff" />
+                app:tabTextColor="#fff"
+                app:tabTextAppearance="@style/Font28sp" />
 
         </android.support.design.widget.AppBarLayout>
 

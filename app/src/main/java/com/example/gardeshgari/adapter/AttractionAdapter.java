@@ -68,19 +68,19 @@ public class AttractionAdapter extends BaseAdapter {
 
         final ImageView saveImageView = view.findViewById(R.id.save);
         if (DataClass.getInstance().getDbHelper().isSavedAttraction(attractionModels.get(position))) {
-            saveImageView.setImageResource(R.drawable.saved);
+            saveImageView.setImageResource(R.drawable.saved_icon);
         } else {
-            saveImageView.setImageResource(R.drawable.unsaved);
+            saveImageView.setImageResource(R.drawable.unsaved_icon);
         }
         saveImageView.setOnClickListener(new View.OnClickListener () {
             @Override
             public void onClick(View v) {
                 if (DataClass.getInstance().getDbHelper().isSavedAttraction(attractionModels.get(position))) {
                     DataClass.getInstance().getDbHelper().deleteSavedAttraction(attractionModels.get(position));
-                    saveImageView.setImageResource(R.drawable.unsaved);
+                    saveImageView.setImageResource(R.drawable.unsaved_icon);
                 } else {
                     DataClass.getInstance().getDbHelper().insertSavedAttraction(attractionModels.get(position));
-                    saveImageView.setImageResource(R.drawable.saved);
+                    saveImageView.setImageResource(R.drawable.saved_icon);
                 }
             }
         });

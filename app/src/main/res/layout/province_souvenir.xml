@@ -16,7 +16,8 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="@drawable/border"
-        android:padding="5dp">
+        android:padding="5dp"
+        tools:ignore="UselessParent">
 
 
         <ImageView
@@ -46,16 +47,18 @@
             <ImageView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@drawable/share"
+                android:src="@drawable/share_icon"
                 android:id="@+id/share"
-                android:padding="10dp"/>
+                android:padding="10dp"
+                tools:ignore="ContentDescription" />
 
             <ImageView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@drawable/unsaved"
+                android:src="@drawable/unsaved_icon"
                 android:id="@+id/save"
-                android:padding="5dp"/>
+                android:padding="5dp"
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:id="@+id/name"

@@ -6,22 +6,12 @@
     android:orientation="vertical"
     android:id="@+id/mainListView">
 
-    <!--<LinearLayout-->
-    <!--android:id="@+id/container_toolbar"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:orientation="vertical">-->
-
-    <!--<include-->
-    <!--android:id="@+id/toolbar"-->
-    <!--layout="@layout/toolbar" />-->
-    <!--</LinearLayout>-->
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="5dp">
+        android:padding="5dp"
+        tools:ignore="UselessParent">
 
         <ImageView
             android:id="@+id/image"
@@ -45,21 +35,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:gravity="right|center">
+            android:gravity="right|center"
+            tools:ignore="RtlHardcoded">
 
             <ImageView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@drawable/share"
+                android:src="@drawable/share_icon"
                 android:id="@+id/share"
-                android:padding="10dp"/>
+                android:padding="10dp"
+                tools:ignore="ContentDescription" />
 
             <ImageView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@drawable/unsaved"
+                android:src="@drawable/unsaved_icon"
                 android:id="@+id/save"
-                android:padding="5dp"/>
+                android:padding="5dp"
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:id="@+id/name"
@@ -99,7 +92,7 @@
                 android:id="@+id/descriptionIcon"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:src="@drawable/description"
+                android:src="@drawable/description_icon"
                 tools:ignore="ContentDescription" />
 
         </LinearLayout>

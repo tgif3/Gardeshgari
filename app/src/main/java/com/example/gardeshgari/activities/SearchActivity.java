@@ -60,7 +60,7 @@ public class SearchActivity extends AppCompatActivity {
         itemList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String str = listViewAdapterContent[position];
+                String str = String.valueOf(SearchActivity.this.listAdapter.getItem(position));
                 for (AttractionModel attractionModel : attractionModels) {
                     if (attractionModel.getTitle().equals(str)) {
                         DataClass.getInstance().setAttractionModel(attractionModel);

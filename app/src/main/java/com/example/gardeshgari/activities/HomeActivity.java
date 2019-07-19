@@ -1,5 +1,6 @@
 package com.example.gardeshgari.activities;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -7,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -59,12 +61,15 @@ public class HomeActivity extends AppCompatActivity {
 
         setTitle("گردشگری");
 
-        createDatabase();
+        setDatabase();
         
         horizontalListViews = new ArrayList<>();
         layoutInflater = (LayoutInflater)this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         initialUI();
+
+        ActivityCompat.requestPermissions(this,
+                new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
     }
 
     private void initialUI() {
@@ -199,7 +204,7 @@ public class HomeActivity extends AppCompatActivity {
                 .show();
     }
 
-    private void createDatabase() {
+    private void setDatabase() {
         DBHelper dbHelper = new DBHelper(this, "database");
         SharedPreferences sharedPreferences = this.getPreferences(Context.MODE_PRIVATE);
         if (!sharedPreferences.contains("database")) {

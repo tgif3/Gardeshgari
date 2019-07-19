@@ -57,7 +57,7 @@ public class ProvinceActivity extends AppCompatActivity {
     private void setupViewPager() {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new SouvenirFragment(souvenirAdapter), "سوغات");
-        adapter.addFragment(new AttractionFragment(attractionAdapter), "جاذبه‌های گردشگری");
+        adapter.addFragment(new AttractionFragment(attractionAdapter), "جاذبه‌ها");
         viewPager.setAdapter(adapter);
     }
 
